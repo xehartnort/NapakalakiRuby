@@ -1,18 +1,18 @@
 #!/usr/bin/env ruby
-#enconding: UTF-8
+# encoding: UTF-8
 
 class BadConsequence
   
   ########## Constructores ##########
   
-  def initialize(text, levels, nVisibleTreasures, nHiddenTreasures, death, specificHiddenTreasures, specificVisibleTreasures)
+  def initialize(text, levels, nVisibleTreasures, nHiddenTreasures, death, specificVisibleTreasures, specificHiddenTreasures)
     @text = text
     @levels = levels
     @nVisibleTreasures = nVisibleTreasures
     @nHiddenTreasures = nHiddenTreasures
     @death = death
-    @specificHiddenTreasures = specificHiddenTreasures
     @specificVisibleTreasures = specificVisibleTreasures
+    @specificHiddenTreasures = specificHiddenTreasures
   end
 =begin
   # Primera implementación posible de constructores, cada constructor tiene un nombre distinto
@@ -88,25 +88,26 @@ class BadConsequence
          "\n\tNumber of Visible Treasures = " + @nVisibleTreasures.to_s +
          "\n\tNumber of Hidden Treasures = " + @nHiddenTreasures.to_s +
          "\n\tDeath = " + @death.to_s
-    textoArrayHiddenTreasures = " \n\tArray Specific Hidden Treasures: "
     textoArrayVisibleTreasures = " \n\tArray Specific Visible Treasures: "
-    
-    if !@specificHiddenTreasures.empty?
-      for @specificHiddenTreasures in 0..@specificHiddenTreasures.size do
-        textoArrayHiddenTreasures += (@specificHiddenTreasures.to_s + " ")
-      end
-    else
-      textoArrayHiddenTreasures += "No pierde ningun tesoro especifico."
-    end
+    textoArrayHiddenTreasures = " \n\tArray Specific Hidden Treasures: "
     
     if !@specificVisibleTreasures.empty?
       for @specificVisibleTreasures in 0..@specificVisibleTreasures.size do
         textoArrayVisibleTreasures += (@specificVisibleTreasures.to_s + " ")
       end
     else  
-      textoArrayVisibleTreasures += "No pierde ningun tesoro especifico."
+      textoArrayVisibleTreasures += "No pierde ningún tesoro específico."
     end
-    return textoInicial + textoArrayHiddenTreasures + textoArrayVisibleTreasures
+    
+    if !@specificHiddenTreasures.empty?
+      for @specificHiddenTreasures in 0..@specificHiddenTreasures.size do
+        textoArrayHiddenTreasures += (@specificHiddenTreasures.to_s + " ")
+      end
+    else
+      textoArrayHiddenTreasures += "No pierde ningún tesoro específico."
+    end
+    
+    return textoInicial + textoArrayVisibleTreasures + textoArrayHiddenTreasures 
   end
   
 end
