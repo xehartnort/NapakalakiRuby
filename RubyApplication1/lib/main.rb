@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 
+=begin
   # max = Máximo número de objetos
   def initialize(max)
     # Array con las cartas de los monstruos
@@ -131,11 +132,10 @@
     prize = Prize.new(Tesoros,Niveles)
     # Añade un nuevo monstruo al final del array
     monstruos << Monster.new("NOMBRE", nivel, badConsequence, prize)
-=end
+
     return monstruos
   end
-
-
+=end
 #Descomentar para aquellas clases que ya existan :)
 #require_relative 'TreasureKind.rb'
 #require_relative 'Prize.rb'
@@ -144,4 +144,4 @@ require_relative 'BadConsequence.rb'
 
 
 malaCosa = BadConsequence.newBadConsequence("Es telible",false,7,16)
-puts malaCosa.to_s
+print malaCosa # en lugar de poner puts malaCosa.to_s, con print ya se invoca a este método

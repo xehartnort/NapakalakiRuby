@@ -48,7 +48,7 @@ class BadConsequence
       new(args[0], 0, 0, 0, args[1], Array.new(0, nil), Array.new(0, nil))
     else 
       #Caso por defecto
-      puts "Constructor error: Incorrect number of args " + args.size.to_s # o una excepción
+      print "BadConsequence constructor error: Incorrect number of args: ", args.size, "\n" # o una excepción
     end
   end
 #=end  
