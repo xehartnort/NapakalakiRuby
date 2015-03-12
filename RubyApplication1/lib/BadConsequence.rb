@@ -91,17 +91,30 @@ class BadConsequence
     textoArrayVisibleTreasures = " \n\tArray Specific Visible Treasures: "
     textoArrayHiddenTreasures = " \n\tArray Specific Hidden Treasures: "
     
-    if !@specificVisibleTreasures.empty?
-      for @specificVisibleTreasures in 0..@specificVisibleTreasures.size do
-        textoArrayVisibleTreasures += (@specificVisibleTreasures.to_s + " ")
+    unless @specificVisibleTreasures.empty?
+#      Este bloque comentado no hace lo que parece, no itera sobre el array      
+#      for @specificVisibleTreasures in 0..@specificVisibleTreasures.size do
+#        textoArrayVisibleTreasures += (@specificVisibleTreasures.to_s + " ")
+#      end
+#      Este que está a continuación sí
+# =>  Para cada componente del array(each) hace (do) con cada componente 
+#     (|tesoro|) las senticas  
+      @specificVisibleTreasures.each do |tesoro|
+        textoArrayVisibleTreasures += (tesoro.to_s + " ")
       end
     else  
       textoArrayVisibleTreasures += "No pierde ningún tesoro específico."
     end
     
-    if !@specificHiddenTreasures.empty?
-      for @specificHiddenTreasures in 0..@specificHiddenTreasures.size do
-        textoArrayHiddenTreasures += (@specificHiddenTreasures.to_s + " ")
+    unless @specificHiddenTreasures.empty?
+#      Este bloque comentado no hace lo que parece, no itera sobre el array
+#      for @specificHiddenTreasures in 0..@specificHiddenTreasures.size do
+#        textoArrayHiddenTreasures += (@specificHiddenTreasures.to_s + " ")
+#      end
+#      Este que está a continuación sí
+# =>  Para cada componente(|tesoro|) del array(each) hace (do) ... (end)
+      @specificHiddenTreasures.each do |tesoro|
+        textoArrayHiddenTreasures += (tesoro.to_s + " ")
       end
     else
       textoArrayHiddenTreasures += "No pierde ningún tesoro específico."
