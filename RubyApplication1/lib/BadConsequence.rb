@@ -14,7 +14,7 @@ class BadConsequence
     @specificVisibleTreasures = specificVisibleTreasures
     @specificHiddenTreasures = specificHiddenTreasures
   end
-#=begin
+  #=begin
   # Primera implementación posible de constructores, cada constructor tiene un nombre distinto
   # ¿Sugerencias para nombres de constructores? 
   # SOLUCIONADO -> Las prácticas dan el nombre y todo
