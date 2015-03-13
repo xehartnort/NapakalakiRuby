@@ -14,13 +14,11 @@ require_relative 'BadConsequence.rb'
 # y luego pegar los cambios en este fichero
 
 
-
-
-
+class Cartas
 #Plantilla de los monstruos al final del método
 
   # max = Máximo número de objetos
-  def initializeMonstruos(max)
+  def self.initializeMonstruos(max)
     # Array con las cartas de los monstruos
     monstruos = Array.new
     
@@ -186,7 +184,38 @@ require_relative 'BadConsequence.rb'
     prize = Prize.new(4,1)
     # Añade un nuevo monstruo al final del array
     monstruos << Monster.new("Familia feliz", 1, badConsequence, prize)
-
+    
+    #Roboggoth
+    badConsequence = BadConsequence.newSpecificTreasures("La quinta directiva\n" +
+                                                         "primaria te obliga a perder 2 niveles y\n" +
+                                                         " un tesoro 2 manos visible\n",2,
+                                                         [TreasureKind::ONEHAND,TreasureKind::ONEHAND],
+                                                         Array.new)
+    prize = Prize.new(2, 1)
+    # Añade un nuevo monstruo al final del array
+    monstruos << Monster.new("Roboggoth", 8, badConsequence, prize)
+    
+    #El espia
+    badConsequence = BadConsequence.newSpecificTreasures("Te asusta en la noche.\n" +
+                                                      "Pierdes un casco visible.\n",0,
+                                                      [TreasureKind::HELMET],Array.new)
+    prize = Prize.new(1, 1)
+    monstruos << Monster.new("El espia", 5, badConsequence, prize)
+  
+  #El lenguas
+  badConsequence = BadConsequence.newNumberOfTreasures("Menudo susto te llevas.\n"+
+                                                       "Pierdes 2 niveles y 5 tesoros visibles.\n",
+                                                       2,5,0)
+  prize = Prize.new(1, 1)
+  monstruos << Monster.new("El lenguas", 20, badConsequence, prize)
+  
+  #Bicéfalo
+  badConsequence = BadConsequence.newNumberOfTreasures("Te faltan manos para\n" +
+                                                       "tanta cabeza. Pierdes 3 niveles y tus" +
+                                                       "tesoros visibles de las manos.\n",
+                                                       3,max,0)
+  prize = Prize.new(1, 1)
+  monstruos << Monster.new("Bicéfalo", 20, badConsequence, prize)
 
 
 =begin PLANTILLA
@@ -204,3 +233,5 @@ require_relative 'BadConsequence.rb'
 
     return monstruos
   end
+
+end
