@@ -18,7 +18,7 @@ tercero el mal royo y el cuarto el premio
 Metodo to_s devuelve los variables de instacia en un String
 =end
   def to_s
-    string = "\nNombre: "+name+"\nNivel: "+combatLevel.to_s+"\nMal royo: "+bc.to_s+"\nPremios: "+prize.to_s
+    string = "\nNombre: "+name+"\nNivel: "+combatLevel.to_s+"\nMal royo: "+bc.to_s+"\nPremios: "+ prize.to_s+"\n"
     return string
   end
 =begin
