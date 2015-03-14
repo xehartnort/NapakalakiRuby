@@ -19,11 +19,11 @@ class BadConsequence
   # ¿Sugerencias para nombres de constructores? 
   # SOLUCIONADO -> Las prácticas dan el nombre y todo
   def self.newNumberOfTreasures(text, levels, nVisible, nHidden) 
-    new(text, levels, nVisible, nHidden, Array.new(0, nil), Array.new(0, nil), false)
+    new(text, levels, nVisible, nHidden, Array.new, Array.new, false)
   end
   
   def self.newDeath(text)
-    new(text, 0, 0, 0, Array.new(0, nil), Array.new(0, nil), true)
+    new(text, 0, 0, 0, Array.new, Array.new, true)
   end
   
   def self.newSpecificTreasures(text, levels, tVisible, tHidden)
@@ -58,7 +58,7 @@ class BadConsequence
   
 ########## Getters ruby ##########
   
-  attr_reader :text, :levels, :nVisible, :nHidden, :death, :specificHiddenTreasures, :specificVisibleTreasures 
+  attr_reader :text, :levels, :nVisibleTreasures, :nHiddenTreasures, :death, :specificHiddenTreasures, :specificVisibleTreasures 
   
   def to_s
     textoInicial = "\n\tTexto = " + @text.to_s + 
