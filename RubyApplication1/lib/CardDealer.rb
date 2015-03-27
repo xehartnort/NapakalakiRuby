@@ -264,7 +264,7 @@ class CardDealer
 #      barajada.insert(Random.rand(0...@unusedTreasures.length), t)
 #    end
 #    @unusedTreasures = barajada
-  @unusedTreasures = @unusedTreasures.shuffle
+  @unusedTreasures = @unusedTreasures.shuffle!
   #@unusedTreasures  = @unusedTreasures.sort_by { rand }
   
   end
@@ -275,7 +275,7 @@ class CardDealer
 #      barajada.insert(Random.rand(0...@unusedMonsters.length), m)
 #    end
 #    @unusedMonsters = barajada
-  @unusedMonsters = @unusedMonsters.shuffle
+  @unusedMonsters = @unusedMonsters.shuffle!
   #@unusedMonsters  = @unusedMonsters.sort_by { rand }
   end
   
