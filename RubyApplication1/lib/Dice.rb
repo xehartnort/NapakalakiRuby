@@ -7,9 +7,9 @@ class Dice
   
   include Singleton
   
-  def setf.getInstance
-    returm Dice.instance
-  end
+#  def setf.getInstance
+#    returm Dice.instance
+#  end
   
   def nextNumber
     return rand(6)+1
