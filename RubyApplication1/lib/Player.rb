@@ -8,12 +8,22 @@ require_relative 'BadConsequence.rb' #require_relative -> respecto al path actua
 require_relative 'Cartas.rb'   
 require_relative 'Treasure.rb'
 
-class Dice
+class Player #antes ponía Dice
   
-  @@MAXHIDDENTREASURES=4
+  #Muy recomendable poner al principio las variables de la clase
+  #junto con su tipo
+  @level # int
+  @name # string
+  @visibleTreasures # array
+  @hiddenTreasures # array
+  @pendingBadConsequence # BadConsequence
+  @@MAXHIDDENTREASURES=4 # const int
+  
+  #Tambien muy recomendable poner los getters/setters al principio
+  attr_reader :visibleTreasures, :hiddenTreasures, :dead
   
   def initialize(name)
-    @level =1
+    @level = 1
     @name = name
     @dead = true
     @visibleTreasures = Array.new
@@ -21,40 +31,39 @@ class Dice
     @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
   end
   
-  def bringToLive
+  def bringToLife #antes bringToLive
     @dead = false
     @visibleTreasures.clear
     @hiddenTreasures.clear
-    @level=1
+#    @level = 1 # level ya es uno cuando se inicializa el jugador
     @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
   end
   
   def incrementLevels(l)
-     @level=@level+l
+     @level=@level+l # se puede poner @level += l
   end
   
   def decrementLevels(l)
-    @level=@level-l
+    @level=@level-l # se puede poner @level -= l
   end
   
-  def setPendingBadConsequence(bc)
-    @pendingBagConsequence = bc
+  def setPendingBadConsequence(b)
+    @pendingBagConsequence = b
   end
-  
-  attr_reader :dead
 
   def discardNecklaceIfVisible
     
   end
   
   def dieIfNoTreasures
-    if visibleTreasure.isEmpty && hiddenTreasure.isEmpty
+    #antes:  if visibleTreasure.isEmpty && hiddenTreasure.isEmpty
+    if @visibleTreasure.empty? && @hiddenTreasure.empty?
       @dead = true
     end
   end
   
   def canIBuyLevels(l)
-    if(@level+l<9)
+    if(@level+l <= 9) # Gana cuando llega al nivel 10
       return true
     else
       return false
@@ -73,7 +82,7 @@ class Dice
     
   end
   
-  def applyBadConsequence(bad)
+  def applyBadConsequence(b)
   
   end
   
@@ -98,27 +107,35 @@ class Dice
   end
   
   def getCombatLevel
-    combatLevel = @level
-    combatLevelCollar = @level
-    collar=false
+#   las asignaciones se pueden hacer en cadena
+    combatLevel = combatLevelCollar = @level 
+#    combatLevel = @level
+#    combatLevelCollar = @level
+    collar = false
     @visibleTreasures.each do |t|
       if t.type==TreasureKind::NECKLACE
-        collar=true
+        collar = true
       end
-      combatLevel = combatLevel + t.minBonus
-      combatLevelCollar = combatLevelCollar + t.maxBonus
+#      combatLevel = combatLevel + t.minBonus
+#      combatLevelCollar = combatLevelCollar + t.maxBonus
+#      Asignaciones compactas más bonicas
+      combatLevel += t.minBonus
+      combatLevelCollar += t.maxBonus
     end
+    
     if collar
       return combatLevelCollar
     else
       return combatLevel
     end
   end
+  
   def validState
-    if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<5
+    #antes: if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<5
+    if @pendingBadConsequence.empty? && @hiddenTreasures.size<5
       return true
     else
-      returnfalse
+      return false
     end
   end
   
@@ -126,18 +143,13 @@ class Dice
   
   end
   
-  attr_reader :dead
-  
   def hasVisibleTreasures
-    if @visibleTreasures.size==0
+    #antes: if @visibleTreasures.size==0
+    unless @visibleTreasures==0 # if not  
       return true
     else
       return false
     end
   end
-  
-  attr_reader :visibleTreasures
-  
-  attr_reader :hiddenTreasures
   
 end
