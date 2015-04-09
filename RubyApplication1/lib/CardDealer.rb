@@ -16,10 +16,9 @@ class CardDealer
   @unusedMonsters
   @usedMonsters
   
-  
-  def self.getInstance
-    CardDealer.instance
-  end
+#  def self.getInstance
+#    CardDealer.instance
+#  end
   
   def initTreasureCardDeck
     
@@ -264,27 +263,27 @@ class CardDealer
 #      barajada.insert(Random.rand(0...@unusedTreasures.length), t)
 #    end
 #    @unusedTreasures = barajada
-  @unusedTreasures = @unusedTreasures.shuffle!
+  @unusedTreasures.shuffle!
   #@unusedTreasures  = @unusedTreasures.sort_by { rand }
   
   end
 
-  def shuffleMonster
+  def shuffleMonsters
 #    barajada = Array.new(@unusedMonsters.length)
 #    @unusedMonsters.each do |m| 
 #      barajada.insert(Random.rand(0...@unusedMonsters.length), m)
 #    end
 #    @unusedMonsters = barajada
-  @unusedMonsters = @unusedMonsters.shuffle!
+  @unusedMonsters.shuffle!
   #@unusedMonsters  = @unusedMonsters.sort_by { rand }
   end
   
-  private :shuffleMonster, :shuffleTreasures, :initMonsterCardDeck, :initTreasureCardDeck
+  private :shuffleMonsters, :shuffleTreasures, :initMonsterCardDeck, :initTreasureCardDeck
   
   def initCards
     initMonsterCardDeck
     initTreasureCardDeck
-    shuffleMonster
+    shuffleMonsters
     shuffleTreasures
   end
   
