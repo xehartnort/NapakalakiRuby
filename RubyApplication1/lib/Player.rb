@@ -33,10 +33,10 @@ class Player #antes ponía Dice
   
   def bringToLife #antes bringToLive
     @dead = false
-    @visibleTreasures.clear
-    @hiddenTreasures.clear
+#    @visibleTreasures.clear
+#    @hiddenTreasures.clear
 #    @level = 1 # level ya es uno cuando se inicializa el jugador
-    @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
+#    @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
   end
   
   def incrementLevels(l)
