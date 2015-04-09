@@ -7,6 +7,7 @@ require_relative 'Player.rb'
 require_relative 'BadConsequence.rb'
 require_relative 'Prize.rb'
 require 'singleton'
+
 class Napakalaki
   include Singleton
   

@@ -287,6 +287,16 @@ class CardDealer
     shuffleTreasures
   end
   
+  def giveTreasureBack(t)
+    @usedTreasures << t
+    @unusedTreasures.delete(t)
+  end
+  
+  def giveMonsterBack(m)
+    @usedMonsters << m
+    @unusedMonsters.delete(m)
+  end
+  
 end
 if __FILE__==$0
   e=CardDealer.instance

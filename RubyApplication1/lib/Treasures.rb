@@ -19,3 +19,9 @@ class Treasure
     @type=t
   end
 end
+
+#main
+if __FILE__ == $0
+  tesorito=Treasure.new("Anillo del poder", 1000000000, 9999, -2, TreasureKind::ONEHAND)
+  puts "Mi tesoorooo: ", tesorito.name, tesorito.goldCoins, tesorito.minBonus, tesorito.maxBonus, tesorito.type
+end

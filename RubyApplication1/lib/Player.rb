@@ -6,7 +6,7 @@ require_relative 'Prize.rb'
 require_relative 'Monster.rb'
 require_relative 'BadConsequence.rb' #require_relative -> respecto al path actual
 require_relative 'Cartas.rb'   
-require_relative 'Treasure.rb'
+require_relative 'Treasures.rb'
 
 class Player #antes ponía Dice
   
@@ -57,7 +57,7 @@ class Player #antes ponía Dice
   
   def dieIfNoTreasures
     #antes:  if visibleTreasure.isEmpty && hiddenTreasure.isEmpty
-    if @visibleTreasure.empty? && @hiddenTreasure.empty?
+    if @visibleTreasures.empty? && @hiddenTreasures.empty?
       @dead = true
     end
   end
@@ -132,7 +132,7 @@ class Player #antes ponía Dice
   
   def validState
     #antes: if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<5
-    if @pendingBadConsequence.empty? && @hiddenTreasures.size<5
+    if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<5
       return true
     else
       return false
@@ -145,11 +145,29 @@ class Player #antes ponía Dice
   
   def hasVisibleTreasures
     #antes: if @visibleTreasures.size==0
-    unless @visibleTreasures==0 # if not  
+    unless @visibleTreasures.empty? # if not  
       return true
     else
       return false
     end
   end
   
+end
+
+#main
+if __FILE__ == $0
+  yo = Player.new("Dani")
+  print "Estoy muerto? ", yo.dead, "\n"
+  yo.bringToLife
+  print "Y ahora? ", yo.dead, "\n"
+  yo.incrementLevels(20)
+  print "Con nivel ", yo.getCombatLevel," puedo comprar niveles? ", yo.canIBuyLevels(1), "\n"
+  yo.decrementLevels(11)
+  print "Y con nivel ", yo.getCombatLevel, "? ", yo.canIBuyLevels(1), "\n"
+  yo.decrementLevels(2)
+  print "Pero con ", yo.getCombatLevel," niveles sí, verdad? ", yo.canIBuyLevels(1), "\n"
+  print "Tengo algún tesoro visible? ", yo.hasVisibleTreasures, "\n"
+  print "Perooo estoy en un estado válido???? ", yo.validState, "\n"
+  print "Pues bueno, estuvo bonito mientras duró, adios mundo cruel ", yo.dieIfNoTreasures, "\n"
+  print "Venga ya, enserio, qué me he muerto? ", yo.dead, "\n"
 end
