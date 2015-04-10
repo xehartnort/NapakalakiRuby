@@ -11,10 +11,10 @@ require 'singleton'
 class CardDealer
   include Singleton #Alé y a pastá
   
-  @unusedTreasures
-  @usedTreasures
-  @unusedMonsters
-  @usedMonsters
+#  @unusedTreasures
+#  @usedTreasures
+#  @unusedMonsters
+#  @usedMonsters
   
 #  def self.getInstance
 #    CardDealer.instance
