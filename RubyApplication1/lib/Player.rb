@@ -132,7 +132,7 @@ class Player #antes ponía Dice
   
   def validState
     #antes: if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<5
-    if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<5
+    if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
       return true
     else
       return false
