@@ -51,7 +51,8 @@ class BadConsequence
   end
  
   def isEmpty
-    if @nVisibleTreasures==0 &&
+    if @levels==0 &&
+       @nVisibleTreasures==0 &&
        @nHiddenTreasures==0 && 
        @specificVisibleTreasures.empty? &&
        @specificHiddenTreasures.empty? &&
