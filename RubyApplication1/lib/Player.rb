@@ -9,16 +9,16 @@ require_relative 'Cartas.rb'
 require_relative 'Treasures.rb'
 
 class Player #antes ponía Dice
-  
-  #Muy recomendable poner al principio las variables de la clase
-  #junto con su tipo
-  @level # int
-  @name # string
-  @visibleTreasures # array
-  @hiddenTreasures # array
-  @pendingBadConsequence # BadConsequence
+# 
+#  Muy recomendable poner al principio las variables de la clase
+#  junto con su tipo
+#  @level # int
+#  @name # string
+#  @visibleTreasures # array
+#  @hiddenTreasures # array
+#  @pendingBadConsequence # BadConsequence
   @@MAXHIDDENTREASURES=4 # const int
-  
+
   #Tambien muy recomendable poner los getters/setters al principio
   attr_reader :visibleTreasures, :hiddenTreasures, :dead
   
