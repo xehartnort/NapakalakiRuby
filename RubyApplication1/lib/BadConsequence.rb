@@ -60,7 +60,6 @@ class BadConsequence
        return true
     else
       return false
-        
     end
   end
 #  
