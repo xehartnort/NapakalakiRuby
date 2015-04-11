@@ -6,7 +6,7 @@ require_relative 'Monster.rb'
 require_relative 'Player.rb'
 require_relative 'BadConsequence.rb'
 require_relative 'Prize.rb'
-require_relative 'Dice.rb'
+require_relative 'Dice.rb' 
 require_relative 'CombatResult.rb'
 require 'singleton'
 

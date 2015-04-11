@@ -3,11 +3,12 @@
 require_relative 'TreasureKind.rb'
 
 class Treasure
-  @name #string
-  @goldCoins #int
-  @minBonus #int
-  @maxBonus #int
-  @type #TreasureKind
+  
+#  @name string
+#  @goldCoins int
+#  @minBonus int
+#  @maxBonus int
+#  @type TreasureKind
   
   attr_reader :name, :goldCoins, :minBonus, :maxBonus, :type
   
