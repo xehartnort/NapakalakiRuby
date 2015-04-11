@@ -6,27 +6,45 @@ require_relative 'Monster.rb'
 require_relative 'Player.rb'
 require_relative 'BadConsequence.rb'
 require_relative 'Prize.rb'
+require_relative 'Dice.rb'
+require_relative 'CombatResult.rb'
 require 'singleton'
 
 class Napakalaki
   include Singleton
+
+# !!! Cuidado, estas variables son de instancia de clase,
+# distintas a las variables de instacia ¡¡¡
+# --------------------
+#  @currentPlayer
+#  @currentPlayerIndex
+#  @currentMonster
+#  @players
+# --------------------
+# 
+# Sin embargo esta variable es solo de clase y así no origina
+# ningún problema :)
+  @@firstTurn=true
   
-  @currentPlayer
-  @currentMonster
-  @players #Array de players
-  
+
   attr_reader :currentPlayer, :currentMonster
   
-  def initPlayers(names)
+  def initPlayers(names)#Array
     @players = Array.new
       names.each do |n|
         @players.push(Player.new(n));
       end
   end
   
-#  def nextPlayer
-#    
-#  end
+  def nextPlayer
+    if @@firstTurn
+      @@firstTurn=false;
+      @currentPlayerIndex = Dice.instance.nextNumber
+    else
+      @currentPlayerIndex++
+      @currentPlayerIndex %= @players.size
+    end
+  end
   
   private :initPlayers, :nextPlayer
   
@@ -54,7 +72,7 @@ class Napakalaki
 #    
 #  end
 #  
-  #  def canMakeTreasureVisible(t)
+#  def canMakeTreasureVisible(t)
 #    
 #  end
 #  
@@ -70,11 +88,11 @@ class Napakalaki
 #    
 #  end
 #  
-#  def nextTurnAllowed
-#    
-#  end
+  def nextTurnIsAllowed
+    @currentPlayer.validState
+  end
 #  
-#  def endOfGame
-#    
-#  end
+  def endOfGame(result)#CombatResult
+    result==CombatResult::WINANDWINGAME;
+  end
 end
