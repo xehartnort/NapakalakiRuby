@@ -16,10 +16,6 @@ class CardDealer
 #  @unusedMonsters
 #  @usedMonsters
   
-#  def self.getInstance
-#    CardDealer.instance
-#  end
-  
   def initTreasureCardDeck
     
     @unusedTreasures = Array.new
@@ -279,6 +275,30 @@ class CardDealer
   end
   
   private :shuffleMonsters, :shuffleTreasures, :initMonsterCardDeck, :initTreasureCardDeck
+  
+  def nextTreasure()
+    if @unusedTreasures.empty?
+      @usedTreasures.shuffle!
+      @unusedTreasures = @usedTreasures.clone
+      @usedTreasures.clear
+    end
+      tesoro = @unusedTreasures.last
+      @unusedTreasures.delete(tesoro)
+      @usedTreasures.add(tesoro)
+      tesoro
+  end
+  
+  def nextMonster()
+    if @unusedMonsters.empty?
+      @usedMonsters.shuffle!
+      @unusedMonsters = @usedMonsters.clone #Funciona porque copia la referencias
+      @usedMonsters.clear
+    end
+      tesoro = @unusedMonsters.last
+      @unusedMonsters.delete(tesoro)
+      @usedMonsters.add(tesoro)
+      tesoro    
+  end
   
   def initCards
     initMonsterCardDeck

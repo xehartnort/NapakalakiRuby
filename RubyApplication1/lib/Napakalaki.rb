@@ -93,6 +93,6 @@ class Napakalaki
   end
 #  
   def endOfGame(result)#CombatResult
-    result==CombatResult::WINANDWINGAME;
+    result==CombatResult::WINANDWINGAME
   end
 end
