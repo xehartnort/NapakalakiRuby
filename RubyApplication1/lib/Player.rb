@@ -155,7 +155,7 @@ class Player #antes ponía Dice
 end
 
 #main
-if __FILE__ == $0
+if __FILE__ == $0 
   yo = Player.new("Dani")
   print "Estoy muerto? ", yo.dead, "\n"
   yo.bringToLife
