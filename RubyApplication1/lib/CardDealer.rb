@@ -11,13 +11,7 @@ require 'singleton'
 class CardDealer
   include Singleton #Alé y a pastá
   
-#  @unusedTreasures
-#  @usedTreasures
-#  @unusedMonsters
-#  @usedMonsters
-  
   def initTreasureCardDeck
-    
     @unusedTreasures = Array.new
     @unusedTreasures<< Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
     @unusedTreasures<< Treasure.new("Botas de investigación", 600, 3, 4, TreasureKind::SHOE)
@@ -291,13 +285,13 @@ class CardDealer
   def nextMonster()
     if @unusedMonsters.empty?
       @usedMonsters.shuffle!
-      @unusedMonsters = @usedMonsters.clone #Funciona porque copia la referencias
+      @unusedMonsters = @usedMonsters.clone #Funciona porque copia la referencias de un nivel
       @usedMonsters.clear
     end
-      tesoro = @unusedMonsters.last
-      @unusedMonsters.delete(tesoro)
-      @usedMonsters.add(tesoro)
-      tesoro    
+    tesoro = @unusedMonsters.last
+    @unusedMonsters.delete(tesoro)
+    @usedMonsters.add(tesoro)
+    tesoro    
   end
   
   def initCards

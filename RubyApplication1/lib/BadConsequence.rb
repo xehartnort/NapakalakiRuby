@@ -39,30 +39,32 @@ class BadConsequence
   end
   
   def substractVisibleTreasure(t)#Treasure t
-    #if t.is_a?(Treasure)
+    if @nVisibleTreasures==0
       @specificVisibleTreasures.delete(t.type)
-    #end
+    else
+      @nVisibleTreasures = (@nVisibleTreasures-1) < 0 ? 0 : @nVisibleTreasures-1 ;
+#     Exactamente igual que en java, if else compacto
+    end
   end
   
   def substractHiddenTreasure(t)#Treasure t
-    #if t.is_a?(Treasure)
+    if @nHiddenTreasures==0
       @specificHiddenTreasures.delete(t.type)
-    #end
+    else
+      @nHiddenTreasures = (@nHiddenTreasures-1) < 0 ? 0 : @nHiddenTreasures-1 ;
+#     Exactamente igual que en java, if else compacto
+    end
   end
  
   def isEmpty
-    if @levels==0 &&
-       @nVisibleTreasures==0 &&
-       @nHiddenTreasures==0 && 
-       @specificVisibleTreasures.empty? &&
-       @specificHiddenTreasures.empty? &&
-       !@death
-       return true
-    else
-      return false
-    end
+    return @levels==0 &&
+           @nVisibleTreasures==0 &&
+           @nHiddenTreasures==0 && 
+           @specificVisibleTreasures.empty? &&
+           @specificHiddenTreasures.empty? &&
+           !@death
   end
-#  
+#  Tengo aún que asegurar que la implementación en Java funciona correctamentes
 #  def adjustToFitTreasureLists(v, h)#v:Treasure[], h:Treasure[]
 #    
 #  end
