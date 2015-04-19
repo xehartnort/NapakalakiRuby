@@ -63,11 +63,7 @@ class Player #antes ponía Dice
   end
   
   def canIBuyLevels(l)
-    if(@level+l <= 9) # Gana cuando llega al nivel 10
-      return true
-    else
-      return false
-    end
+    @level+l<=9 # Gana cuando llega al nivel 10
   end
   
   def computeGoldCoinsValue(t)
@@ -113,9 +109,12 @@ class Player #antes ponía Dice
 #    combatLevelCollar = @level
     collar = false
     @visibleTreasures.each do |t|
-      if t.type==TreasureKind::NECKLACE
-        collar = true
-      end
+#      if t.type==TreasureKind::NECKLACE
+#        collar = true
+#      end
+#      Versión compacta, solo Ruby 
+      collar=true if t.type==TreasureKind::NECKLACE
+          
 #      combatLevel = combatLevel + t.minBonus
 #      combatLevelCollar = combatLevelCollar + t.maxBonus
 #      Asignaciones compactas más bonicas
@@ -123,20 +122,18 @@ class Player #antes ponía Dice
       combatLevelCollar += t.maxBonus
     end
     
-    if collar
-      return combatLevelCollar
-    else
-      return combatLevel
-    end
+#    if collar
+#      return combatLevelCollar
+#    else
+#      return combatLevel
+#    end
+#    Versión compacta, mismo funcionamiento que en java
+    collar==true ? combatLevelCollar : combatLevel
   end
   
   def validState
     #antes: if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<5
-    if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
-      return true
-    else
-      return false
-    end
+    @pendingBadConsequence.isEmpty && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
   end
   
   def initTreasures
@@ -145,11 +142,12 @@ class Player #antes ponía Dice
   
   def hasVisibleTreasures
     #antes: if @visibleTreasures.size==0
-    unless @visibleTreasures.empty? # if not  
-      return true
-    else
-      return false
-    end
+#    unless @visibleTreasures.empty? # if not  
+#      return true
+#    else
+#      return false
+#    end
+    !@visibleTreasures.empty?
   end
   
 end
