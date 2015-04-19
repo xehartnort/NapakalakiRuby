@@ -21,11 +21,10 @@ class Napakalaki
 #  @currentMonster
 #  @players
 # --------------------
-# 
+
 # Sin embargo esta variable es solo de clase y así no origina
 # ningún problema :)
   @@firstTurn=true
-  
 
   attr_reader :currentPlayer, :currentMonster
   
@@ -48,34 +47,32 @@ class Napakalaki
   
   private :initPlayers, :nextPlayer
   
-#  def combat 
-#    
-#  end
-#  
-#  def discardVisibleTreasure(t)
-#    
-#  end
-#  
-#  def discardHiddenTreasure(t)
-#    
-#  end
-#  
-#  def makeTreasureVisible(t)
-#    
-#  end
-#  
-#  def buyLevels(visible, hidden)
-#    
-#  end
-#  
-#  def initGame(players)
-#    
-#  end
-#  
-#  def canMakeTreasureVisible(t)
-#    
-#  end
-#  
+  def combat 
+    @currentPlayer.combat(@currentMonster)
+  end
+  
+  def discardVisibleTreasure(t)#Treasure
+    @currentPlayer.discardVisibleTreasure(t)
+  end
+  
+  def discardHiddenTreasure(t)#Treasure
+    @currentPlayer.discardHiddenTreasure(t)
+  end
+  
+  def makeTreasureVisible(t)#Treasure
+    @currentPlayer.canMakeTreasureVisible(t)
+  end
+  
+  def buyLevels(visible, hidden)#Array, Array
+    @currentPlayer.buyLevels(visible, hidden)
+  end
+  
+  def initGame(players)#Array
+    initPlayers(players)
+    CardDealer.instance.initCards
+    nextTurn
+  end
+  
 #  def getVisibleTreasures
 #    
 #  end
@@ -84,15 +81,23 @@ class Napakalaki
 #    
 #  end
 #  
-#  def nextTurn
-#    
-#  end
-#  
+  def nextTurn
+    if nextTurnIsAllowed
+      @currentMonster = CardDealer.instace.nextMonster
+      @currentPlayer = nextPlayer
+      if @currentPlayer.isDead
+        @currentPlayer.initTreasures
+      end
+    end
+    nextTurnIsAllowed
+  end
+  
   def nextTurnIsAllowed
     @currentPlayer.validState
   end
-#  
+  
   def endOfGame(result)#CombatResult
     result==CombatResult::WINANDWINGAME
   end
+  
 end
