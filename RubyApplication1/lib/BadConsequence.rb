@@ -30,7 +30,7 @@ class BadConsequence
   
   private_class_method :new # Efecto Wert, privatiza el método new
   
-########## Getters ruby ##########
+  ########## Getters ruby ##########
   
   attr_reader :text, :levels, :nVisibleTreasures, :nHiddenTreasures, :death, :specificHiddenTreasures, :specificVisibleTreasures 
     
@@ -64,10 +64,43 @@ class BadConsequence
            @specificHiddenTreasures.empty? &&
            !@death
   end
-#  Tengo aún que asegurar que la implementación en Java funciona correctamentes
-#  def adjustToFitTreasureLists(v, h)#v:Treasure[], h:Treasure[]
-#    
-#  end
+
+  def adjustToFitTreasureLists(v, h)#v:Treasure[], h:Treasure[]
+    if(@nVisibleTreasures==0 && @nHiddenTreasures==0)
+      newVisibleTreasures = Array.new
+      newHiddenTreasures = Array.new
+      add=true
+      
+      v.each do |t|
+        if v.count(t)==2 && @specificVisibleTreasures.count(t.type)==1
+          if add
+            add = false
+            newVisibleTreasures << t.type
+          end
+        else
+            newVisibleTreasures << t.type
+        end
+      end
+      
+      add=true
+      
+      h.each do |t|
+        if h.count(t)==2 && @specificHiddenTreasures.count(t.type)==1
+          if add
+            add = false
+            newHiddenTreasures << t.type
+          end
+        else
+            newHiddenTreasures << t.type
+        end
+      end
+      BadConsequence.new(@text, @levels, newVisibleTreasures, newHiddenTreasures) #return
+    else
+      minVisibleTreasures =  @nVisibleTreasures > v.length ? v.length : @nVisibleTreasures
+      minHiddenTreasures = @nHiddenTreasures > h.length ? h.length : @nHiddenTreasures
+      BadConsequence.new(@text, @levels, minVisibleTreasures, minHiddenTreasures) #return
+    end
+  end
   
   def to_s
     textoInicial = "\n\tTexto = " + @text.to_s + 
@@ -94,7 +127,7 @@ class BadConsequence
       textoArrayHiddenTreasures += "No pierde ningún tesoro específico."
     end
     
-    return textoInicial + textoArrayVisibleTreasures + textoArrayHiddenTreasures 
+    textoInicial + textoArrayVisibleTreasures + textoArrayHiddenTreasures #return
   end
   
 end
