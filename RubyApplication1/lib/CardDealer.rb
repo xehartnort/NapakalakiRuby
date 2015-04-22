@@ -276,10 +276,10 @@ class CardDealer
       @unusedTreasures = @usedTreasures.clone
       @usedTreasures.clear
     end
-      tesoro = @unusedTreasures.last
-      @unusedTreasures.delete(tesoro)
-      @usedTreasures.add(tesoro)
-      tesoro
+      treasure = @unusedTreasures.last
+      @unusedTreasures.delete(treasure)
+      @usedTreasures.add(treasure)
+      treasure #return
   end
   
   def nextMonster()
@@ -288,10 +288,10 @@ class CardDealer
       @unusedMonsters = @usedMonsters.clone #Funciona porque copia la referencias de un nivel
       @usedMonsters.clear
     end
-    tesoro = @unusedMonsters.last
-    @unusedMonsters.delete(tesoro)
-    @usedMonsters.add(tesoro)
-    tesoro    
+    monster = @unusedMonsters.last
+    @unusedMonsters.delete(monster)
+    @usedMonsters.add(monster)
+    monster #return
   end
   
   def initCards

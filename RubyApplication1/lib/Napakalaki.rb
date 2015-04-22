@@ -30,9 +30,9 @@ class Napakalaki
   
   def initPlayers(names)#Array
     @players = Array.new
-      names.each do |n|
-        @players.push(Player.new(n));
-      end
+    names.each do |n|
+      @players.push(Player.new(n));
+    end
   end
   
   def nextPlayer
@@ -48,7 +48,7 @@ class Napakalaki
   private :initPlayers, :nextPlayer
   
   def combat 
-    @currentPlayer.combat(@currentMonster)
+    @currentPlayer.combat(@currentMonster) #return
   end
   
   def discardVisibleTreasure(t)#Treasure
@@ -64,7 +64,7 @@ class Napakalaki
   end
   
   def buyLevels(visible, hidden)#Array, Array
-    @currentPlayer.buyLevels(visible, hidden)
+    @currentPlayer.buyLevels(visible, hidden) #return
   end
   
   def initGame(players)#Array
@@ -89,15 +89,15 @@ class Napakalaki
         @currentPlayer.initTreasures
       end
     end
-    nextTurnIsAllowed
+    nextTurnIsAllowed #return
   end
   
   def nextTurnIsAllowed
-    @currentPlayer.validState
+    @currentPlayer.validState #return
   end
   
   def endOfGame(result)#CombatResult
-    result==CombatResult::WINANDWINGAME
+    result==CombatResult::WINANDWINGAME #return
   end
   
 end

@@ -4,24 +4,23 @@
 class Prize
 =begin
 Constructor que crea y asigna las variables 
-de instancia el primer valor sera el numero
-de tesoros y el segundo sera los niveles que
-gana el juegador al derrotar al mostruo
+de instancia el primer valor sera el número
+de tesoros y el segundo será los niveles que
+gana el jugador al derrotar al mostruo
 =end
   def initialize(treasures, levels)
     @treasures = treasures
     @levels = levels
   end
-=begin
-Metodo to_s devuelve los variables de instacia en un String
-=end
+
+# Método to_s devuelve los variables de instacia en un String
+
   def to_s
-    string = "\n\tNumero de tesoros: "+treasures.to_s+"\n\tNiveles: "+levels.to_s
-    return string
+    "\n\tNumero de tesoros: "+@treasures.to_s+"\n\tNiveles: "+@levels.to_s #return
   end
-=begin
-Metodo para leer valores de variables de instancia 
-=end
+
+# Método para leer valores de variables de instancia 
+
   attr_reader :treasures, :levels
 
 end

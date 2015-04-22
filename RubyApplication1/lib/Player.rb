@@ -8,7 +8,7 @@ require_relative 'BadConsequence.rb' #require_relative -> respecto al path actua
 require_relative 'Cartas.rb'   
 require_relative 'Treasures.rb'
 
-class Player #antes ponía Dice
+class Player
 # 
 #  Muy recomendable poner al principio las variables de la clase
 #  junto con su tipo
@@ -31,20 +31,16 @@ class Player #antes ponía Dice
     @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
   end
   
-  def bringToLife #antes bringToLive
+  def bringToLife 
     @dead = false
-#    @visibleTreasures.clear
-#    @hiddenTreasures.clear
-#    @level = 1 # level ya es uno cuando se inicializa el jugador
-#    @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
   end
   
   def incrementLevels(l)
-     @level=@level+l # se puede poner @level += l
+     @level= @level+l
   end
   
   def decrementLevels(l)
-    @level=@level-l # se puede poner @level -= l
+    @level= @level-l < 0 ? 0 : @level-l # el nivel no debe de ser negativo
   end
   
   def setPendingBadConsequence(b)
@@ -56,7 +52,6 @@ class Player #antes ponía Dice
   end
   
   def dieIfNoTreasures
-    #antes:  if visibleTreasure.isEmpty && hiddenTreasure.isEmpty
     if @visibleTreasures.empty? && @hiddenTreasures.empty?
       @dead = true
     end
@@ -105,8 +100,6 @@ class Player #antes ponía Dice
   def getCombatLevel
 #   las asignaciones se pueden hacer en cadena
     combatLevel = combatLevelCollar = @level 
-#    combatLevel = @level
-#    combatLevelCollar = @level
     collar = false
     @visibleTreasures.each do |t|
 #      if t.type==TreasureKind::NECKLACE
@@ -115,9 +108,6 @@ class Player #antes ponía Dice
 #      Versión compacta, solo Ruby 
       collar=true if t.type==TreasureKind::NECKLACE
 #     {    "     } if CONDICION    
-#      combatLevel = combatLevel + t.minBonus
-#      combatLevelCollar = combatLevelCollar + t.maxBonus
-#      Asignaciones compactas más bonicas
       combatLevel += t.minBonus
       combatLevelCollar += t.maxBonus
     end
@@ -132,7 +122,6 @@ class Player #antes ponía Dice
   end
   
   def validState
-    #antes: if @pendingBadConsequence.isEmpty && @hiddenTreasures.size<5
     @pendingBadConsequence.isEmpty && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
   end
   
@@ -141,12 +130,6 @@ class Player #antes ponía Dice
   end
   
   def hasVisibleTreasures
-    #antes: if @visibleTreasures.size==0
-#    unless @visibleTreasures.empty? # if not  
-#      return true
-#    else
-#      return false
-#    end
     !@visibleTreasures.empty?
   end
   
