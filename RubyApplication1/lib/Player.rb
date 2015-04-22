@@ -114,7 +114,7 @@ class Player #antes ponía Dice
 #      end
 #      Versión compacta, solo Ruby 
       collar=true if t.type==TreasureKind::NECKLACE
-          
+#     {    "     } if CONDICION    
 #      combatLevel = combatLevel + t.minBonus
 #      combatLevelCollar = combatLevelCollar + t.maxBonus
 #      Asignaciones compactas más bonicas
@@ -153,7 +153,7 @@ class Player #antes ponía Dice
 end
 
 #main
-if __FILE__ == $0
+if __FILE__ == $0 
   yo = Player.new("Dani")
   print "Estoy muerto? ", yo.dead, "\n"
   yo.bringToLife
