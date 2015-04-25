@@ -40,7 +40,11 @@ class Player
   end
   
   def decrementLevels(l)
-    @level= @level-l < 0 ? 0 : @level-l # el nivel no debe de ser negativo
+    if @level-l <= 0
+      die
+    else
+      @level = @level - l
+    end
   end
   
   def setPendingBadConsequence(b)
@@ -122,7 +126,7 @@ class Player
   end
   
   def validState
-    @pendingBadConsequence.isEmpty && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
+    @pendingBadConsequence.empty? && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
   end
   
   def initTreasures
