@@ -18,7 +18,7 @@ tercero el mal rollo y el cuarto el premio
 #Método to_s devuelve los variables de instacia en un String
 
   def to_s
-    "\nNombre: "+@name+"\nNivel: "+@combatLevel.to_s+"\nMal rollo: "+@bc.to_s+"\nPremios: "+@prize.to_s+"\n" #return
+    "Nombre: "+@name+"\nNivel: "+@combatLevel.to_s+"\nMal rollo: "+@bc.to_s+"\nPremios: "+@prize.to_s#return
   end
 
 #Métodos para leer valores de variables de instancia 
