@@ -38,9 +38,9 @@ class Napakalaki
   def nextPlayer
     if @@firstTurn
       @@firstTurn=false;
-      @currentPlayerIndex = Dice.instance.nextNumber
+      @currentPlayerIndex = Dice.instance.nextNumber%@players.size
     else
-      @currentPlayerIndex++
+      @currentPlayerIndex+=1
       @currentPlayerIndex %= @players.size
     end
   end
@@ -72,15 +72,7 @@ class Napakalaki
     CardDealer.instance.initCards
     nextTurn
   end
-  
-#  def getVisibleTreasures
-#    
-#  end
-#  
-#  def getHiddenTreasures
-#    
-#  end
-#  
+
   def nextTurn
     if nextTurnIsAllowed
       @currentMonster = CardDealer.instace.nextMonster
@@ -93,7 +85,7 @@ class Napakalaki
   end
   
   def nextTurnIsAllowed
-    @currentPlayer.validState #return
+    @currentPlayer==nil ? true : @currentPlayer.validState #return
   end
   
   def endOfGame(result)#CombatResult
