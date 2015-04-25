@@ -62,44 +62,60 @@ class BadConsequence
            @nHiddenTreasures==0 && 
            @specificVisibleTreasures.empty? &&
            @specificHiddenTreasures.empty? &&
-           !@death
+           @death==false
   end
 
   def adjustToFitTreasureLists(v, h)#v:Treasure[], h:Treasure[]
-    if(@nVisibleTreasures==0 && @nHiddenTreasures==0)
-      newVisibleTreasures = Array.new
-      newHiddenTreasures = Array.new
+    newVisibleTreasuresBad = Array.new
+    newHiddenTreasuresBad = Array.new
+    if !@specificVisibleTreasures.empty?|| !@specificHiddenTreasures.empty?
+      newVisibleTreasuresPlayer = Array.new
+      newHiddenTreasuresPlayer = Array.new
       add=true
       
       v.each do |t|
         if v.count(t)==2 && @specificVisibleTreasures.count(t.type)==1
           if add
             add = false
-            newVisibleTreasures << t.type
+            newVisibleTreasuresPlayer << t
+            newVisibleTreasuresBad << t.type
           end
         else
-            newVisibleTreasures << t.type
+            newVisibleTreasuresPlayer << t
+            newVisibleTreasuresBad << t.type
         end
       end
-      
+      v = newVisibleTreasuresPlayer.empty? ? v : newVisibleTreasuresPlayer
       add=true
       
       h.each do |t|
         if h.count(t)==2 && @specificHiddenTreasures.count(t.type)==1
           if add
             add = false
-            newHiddenTreasures << t.type
+            newHiddenTreasuresPlayer << t
+            newHiddenTreasuresBad << t.type
           end
         else
-            newHiddenTreasures << t.type
+            newHiddenTreasuresPlayer << t
+            newHiddenTreasuresBad << t.type
         end
       end
-      BadConsequence.new(@text, @levels, newVisibleTreasures, newHiddenTreasures) #return
+      
+      h = newHiddenTreasuresPlayer.isEmpty() ? h : newHiddenTreasuresPlayer
+     
     else
+#     Número de tesoros visibles a quitar 
       minVisibleTreasures =  @nVisibleTreasures > v.length ? v.length : @nVisibleTreasures
+      for i in 1..minVisibleTreasures do
+        newVisibleTreasuresBad << v[i].type
+      end
+#     Número de tesoros ocultos a quitar
       minHiddenTreasures = @nHiddenTreasures > h.length ? h.length : @nHiddenTreasures
-      BadConsequence.new(@text, @levels, minVisibleTreasures, minHiddenTreasures) #return
+      for i in 1..minHiddenTreasures do
+        newHiddenTreasuresBad << h[i].type
+      end
     end
+    BadConsequence.new(@text, @levels, newVisibleTreasuresBad, newHiddenTreasuresBad) #return
   end
   
   def to_s
