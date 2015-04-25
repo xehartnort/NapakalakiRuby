@@ -19,6 +19,13 @@ class Treasure
     @maxBonus=max
     @type=t
   end
+  def to_s
+    "\n\tTesoro: " + name + 
+    "\n\t\tGoldBonus: " + Integer.toString(goldBonus) + 
+    "\n\t\tMinBonus: " + Integer.toString(minBonus) + 
+    "\n\t\tMaxBonus: " + Integer.toString(maxBonus) +
+    "\n\t\tTreasureKind: " + type
+  end
 end
 
 #main
