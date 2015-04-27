@@ -10,6 +10,10 @@ require_relative 'Treasures.rb'
 require_relative 'CardDealer.rb'
 require_relative 'Dice.rb'
 
+# PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION
+# Mucho cuidado con delete, que borra todas las ocurrencias de un dato
+# no solo uno
+# PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION
 class Player
 
   @@MAXHIDDENTREASURES=4
@@ -135,7 +139,7 @@ class Player
   end
   
   def canMakeTreasureVisible(t)
-    @visibleTreasure.insert(-1, t)#inserta al final del array el objeto t
+    @visibleTreasure << t #inserta al final del array el objeto t
     canI = true
     valido = [false, false, false, false, false, false]
     @vivibleTreasure.each do |i|
@@ -201,7 +205,7 @@ class Player
           end
       end
     end
-    @visibleTreasures.delete(t)
+    @visibleTreasures.pop
     canI  #return
   end
   
@@ -242,13 +246,11 @@ class Player
   def getCombatLevel
     combatLevel = combatLevelCollar = @level 
     collar = false
-    
     @visibleTreasures.each do |t|
       collar=true if t.type==TreasureKind::NECKLACE    
       combatLevel += t.minBonus
       combatLevelCollar += t.maxBonus
     end
-    
     collar==true ? combatLevelCollar : combatLevel
   end
   
@@ -298,4 +300,5 @@ class Player
     end
     text += textoHiddenTreasures + "}" + textoVisibleTreasures + "}"
   end 
+  
 end
