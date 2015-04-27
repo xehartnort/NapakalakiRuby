@@ -12,7 +12,7 @@ require_relative 'Dice.rb'
 
 class Player
 
-  @@MAXHIDDENTREASURES=4 # const int
+  @@MAXHIDDENTREASURES=4
 
   attr_reader :visibleTreasures, :hiddenTreasures, :dead
   
@@ -25,7 +25,7 @@ class Player
     @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
     @dealer = CardDealer.instance
   end
-  
+  private
   def bringToLife 
     @dead = false
   end
@@ -43,7 +43,7 @@ class Player
   end
   
   def setPendingBadConsequence(b)
-    @pendingBagConsequence = b
+    @pendingBadConsequence = b
   end
   
   def die
@@ -55,7 +55,6 @@ class Player
       discardHiddenTreasure(t)
     end
   end
-    
   
   def discardNecklaceIfVisible
     @visibleTreasures.each do |t|
@@ -74,7 +73,7 @@ class Player
   def canIBuyLevels(l)
     @level+l<=9 # Gana cuando llega al nivel 10
   end
-  
+  protected
   def computeGoldCoinsValue(t)
     niveles = 0.0
     t.each do |i|
@@ -82,7 +81,7 @@ class Player
     end
     niveles
   end
-  
+  public
   def applyPrize(p)
     incrementLevels(p.levels)
         for i in (1..p.treasures)
@@ -227,26 +226,15 @@ class Player
   end
   
   def getCombatLevel
-#   las asignaciones se pueden hacer en cadena
     combatLevel = combatLevelCollar = @level 
     collar = false
+    
     @visibleTreasures.each do |t|
-#      if t.type==TreasureKind::NECKLACE
-#        collar = true
-#      end
-#      Versión compacta, solo Ruby 
-      collar=true if t.type==TreasureKind::NECKLACE
-#     {    "     } if CONDICION    
+      collar=true if t.type==TreasureKind::NECKLACE    
       combatLevel += t.minBonus
       combatLevelCollar += t.maxBonus
     end
     
-#    if collar
-#      return combatLevelCollar
-#    else
-#      return combatLevel
-#    end
-#    Versión compacta, mismo funcionamiento que en java
     collar==true ? combatLevelCollar : combatLevel
   end
   
@@ -258,12 +246,8 @@ class Player
     bringToLive
     tirada = Dice.instance.nextNumber
     numeroTesoros=2
-    if tirada==6
-      numeroTesoros=3
-    end
-    if tirada==1
-      numeroTesoros=1
-    end
+    numeroTesoros=3 if tirada==6
+    numeroTesoros=1 if tirada==1
     for i in (0..numeroTesoros)
       @hiddenTeasure.insert(-1, @dealer.nextTreasure)
     end
@@ -273,6 +257,27 @@ class Player
     !@visibleTreasures.empty?
   end
   
+  def to_s
+    text = "\n\tName = " + @name.to_s+" \n\tLevel = " + @level.to_s(10) + " \n\tPendingBadConsequence: { " + @pendingBadConsequence.to_s + "\n\t} \n\tDead = " + @dead.to_s
+    textoHiddenTreasures = " \n\tArray Hidden Treasures: { "
+    textoVisibleTreasures = " \n\tArray Visible Treasures: { "
+    if @visibleTreasures.empty?
+      @visibleTreasures.each do |t|
+        textoVisibleTreasures += t.to_s + " "
+      end 
+    else
+      textoVisibleTreasures += "No tiene ningún tesoro visible. "
+    end
+    if @hiddenTreasures.empty?
+      @hiddenTreasures.each do |t|
+        textoHiddenTreasures += t.to_s + " "
+      end 
+    else
+      textoHiddenTreasures += "No tiene ningún tesoro visible. "
+    end
+    text += textoHiddenTreasures + "}" + textoVisibleTreasures + "}"
+    text
+  end 
 end
 
 #main
