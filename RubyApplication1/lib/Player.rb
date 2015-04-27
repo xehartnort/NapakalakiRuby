@@ -55,14 +55,14 @@ class Player
 #  end
   
   def die
-    @level=1
     @visibleTreasures.each do |t| 
-      discardVisibleTreasure(t)
+      @dealer.giveTreasureBack(t)
     end
+    @visibleTreasures.clear
     @hiddenTreasures.each  do |t| 
-      discardHiddenTreasure(t)
+      @dealer.giveTreasureBack(t)
     end
-    @dead = true # lo mata
+    @hiddenTreasures.clear
   end
   
   def discardNecklaceIfVisible
