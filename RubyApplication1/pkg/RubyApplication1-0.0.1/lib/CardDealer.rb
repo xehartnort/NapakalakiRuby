@@ -11,18 +11,8 @@ require 'singleton'
 class CardDealer
   include Singleton #Alé y a pastá
   
-  @unusedTreasures
-  @usedTreasures
-  @unusedMonsters
-  @usedMonsters
-  
-  
-  def self.getInstance
-    CardDealer.instance
-  end
-  
   def initTreasureCardDeck
-    
+    @usedTreasures = Array.new
     @unusedTreasures = Array.new
     @unusedTreasures<< Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
     @unusedTreasures<< Treasure.new("Botas de investigación", 600, 3, 4, TreasureKind::SHOE)
@@ -60,7 +50,7 @@ class CardDealer
   end
 
   def initMonsterCardDeck
-    
+    @usedMonsters = Array.new
     @unusedMonsters = Array.new
     # 3 Byakhees de bonanza
     # El primer array de badConsequence es specificVisibleTreasures, 
@@ -107,8 +97,8 @@ class CardDealer
     # el segundo specificHiddenTreasures
     # Análogamente si no es array es nVisibleTreasures y nHiddenTreasures
     badConsequence = BadConsequence.newSpecificTreasures("Te atrapan para llevarte de fiesta" +
-                                                        "y te dejan car en mitad del vuelo." +
-                                                        "Descarta 1 mano visible y 1 mano oculta",0,
+                                                        "\n\ty te dejan car en mitad del vuelo." +
+                                                        "\n\tDescarta 1 mano visible y 1 mano oculta",0,
                                                         [TreasureKind::ONEHAND], 
                                                         [TreasureKind::ONEHAND])
     prize = Prize.new(4,1)
@@ -144,7 +134,7 @@ class CardDealer
     # el segundo specificHiddenTreasures
     # Análogamente si no es array es nVisibleTreasures y nHiddenTreasures
     badConsequence = BadConsequence.newSpecificTreasures("Sientes bichos bajo la ropa." +
-                                                        "Descarta la armadura visible",0,
+                                                        "\n\tDescarta la armadura visible",0,
                                                         [TreasureKind::ARMOR], 
                                                         Array.new)
     prize = Prize.new(1,1)
@@ -168,7 +158,7 @@ class CardDealer
     # el segundo specificHiddenTreasures
     # Análogamente si no es array es nVisibleTreasures y nHiddenTreasures
     badConsequence = BadConsequence.newNumberOfTreasures("Toses los pulmones y"+
-                                                        "pierdes 2 niveles",
+                                                        "\n\tpierdes 2 niveles",
                                                         2, 0, 0)
     prize = Prize.new(1,1)
     # Añade un nuevo monstruo al final del array
@@ -178,22 +168,22 @@ class CardDealer
   
     #Los hondos
     badConsequence = BadConsequence.newDeath("Estos  unusedMonsters resultan "+
-                                            "bastante superficiales y te aburren "+
-                                            "mortalmente. Estas muerto")
+                                            "\n\tbastante superficiales y te aburren "+
+                                            "\n\tmortalmente. Estas muerto")
     prize = Prize.new(2,1)
     
     @unusedMonsters << Monster.new("Los hondos", 8 ,badConsequence,prize)
     
     #Semillas Cthulhu
     badConsequence = BadConsequence.newNumberOfTreasures("Pierdes 2 niveles y 2 "+
-                                                        "tesoros ocultos", 2, 0, 2)
+                                                        "\n\ttesoros ocultos", 2, 0, 2)
     prize = Prize.new(2,1)
     # Añade un nuevo monstruo al final del array
     @unusedMonsters << Monster.new("Semillas Cthulhu", 4, badConsequence, prize)
    
    #Dameargo
    badConsequence = BadConsequence.newSpecificTreasures("Te intentas escaquear."+
-                                                        " Pierdes una mano visible",0,
+                                                        "\n\tPierdes una mano visible",0,
                                                         [TreasureKind::ONEHAND],
                                                         Array.new)
    prize = Prize.new(2,1)
@@ -202,7 +192,7 @@ class CardDealer
 
     #Pollipólipo volante
     badConsequence = BadConsequence.newNumberOfTreasures("Da mucho asquito."+
-                                                        " Pierdes 3 niveles", 
+                                                        "\n\tPierdes 3 niveles", 
                                                         3, 0, 0)
     prize = Prize.new(1,1)
     # Añade un nuevo monstruo al final del array
@@ -210,8 +200,8 @@ class CardDealer
     
     #Yskhtihyssq-Goth
     badConsequence = BadConsequence.newDeath("No le hace gracia que"+
-                                            " pronuncien mal su nombre. Estas"+
-                                            " muerto")
+                                            "\n\tpronuncien mal su nombre. Estas"+
+                                            "\n\tmuerto")
     prize = Prize.new(3,1)
     # Añade un nuevo monstruo al final del array
     @unusedMonsters << Monster.new("Yskhtihyssq-Goth", 12, badConsequence, prize)
@@ -219,15 +209,15 @@ class CardDealer
     
     #Familia feliz
     badConsequence = BadConsequence.newDeath("La familia te atrapa."+
-                                            "Estas muerto")
+                                            "\n\tEstas muerto")
     prize = Prize.new(4,1)
     # Añade un nuevo monstruo al final del array
     @unusedMonsters << Monster.new("Familia feliz", 1, badConsequence, prize)
     
     #Roboggoth
     badConsequence = BadConsequence.newSpecificTreasures("La quinta directiva " +
-                                                         "primaria te obliga a perder 2 niveles y" +
-                                                         " un tesoro 2 manos visible.",2,
+                                                         "\n\tprimaria te obliga a perder 2 niveles y" +
+                                                         "\n\tun tesoro 2 manos visible.",2,
                                                          [TreasureKind::ONEHAND,TreasureKind::ONEHAND],
                                                          Array.new)
     prize = Prize.new(2, 1)
@@ -236,22 +226,22 @@ class CardDealer
     
     #El espia
     badConsequence = BadConsequence.newSpecificTreasures("Te asusta en la noche." +
-                                                      "Pierdes un casco visible.",0,
+                                                      "\n\tPierdes un casco visible.",0,
                                                       [TreasureKind::HELMET], Array.new)
     prize = Prize.new(1, 1)
     @unusedMonsters << Monster.new("El espia", 5, badConsequence, prize)
   
     #El lenguas
     badConsequence = BadConsequence.newNumberOfTreasures("Menudo susto te llevas."+
-                                                         "Pierdes 2 niveles y 5 tesoros visibles.",
+                                                         "\n\tPierdes 2 niveles y 5 tesoros visibles.",
                                                          2,5,0)
     prize = Prize.new(1, 1)
     @unusedMonsters << Monster.new("El lenguas", 20, badConsequence, prize)
   
     #Bicéfalo
     badConsequence = BadConsequence.newNumberOfTreasures("Te faltan manos para" +
-                                                         "tanta cabeza. Pierdes 3 niveles y tus" +
-                                                         "tesoros visibles de las manos.",
+                                                         "\n\tanta cabeza. Pierdes 3 niveles y tus" +
+                                                         "\n\ttesoros visibles de las manos.",
                                                          3,9999,0)
     prize = Prize.new(1, 1)
     @unusedMonsters << Monster.new("Bicéfalo", 20, badConsequence, prize)
@@ -264,28 +254,60 @@ class CardDealer
 #      barajada.insert(Random.rand(0...@unusedTreasures.length), t)
 #    end
 #    @unusedTreasures = barajada
-  @unusedTreasures = @unusedTreasures.shuffle!
+  @unusedTreasures.shuffle!
   #@unusedTreasures  = @unusedTreasures.sort_by { rand }
   
   end
 
-  def shuffleMonster
+  def shuffleMonsters
 #    barajada = Array.new(@unusedMonsters.length)
 #    @unusedMonsters.each do |m| 
 #      barajada.insert(Random.rand(0...@unusedMonsters.length), m)
 #    end
 #    @unusedMonsters = barajada
-  @unusedMonsters = @unusedMonsters.shuffle!
+  @unusedMonsters.shuffle!
   #@unusedMonsters  = @unusedMonsters.sort_by { rand }
   end
   
-  private :shuffleMonster, :shuffleTreasures, :initMonsterCardDeck, :initTreasureCardDeck
+  private :shuffleMonsters, :shuffleTreasures, :initMonsterCardDeck, :initTreasureCardDeck
+  
+  def nextTreasure()
+    if @unusedTreasures.empty?
+      @usedTreasures.shuffle!
+      @unusedTreasures = @usedTreasures.clone
+      @usedTreasures.clear
+    end
+      treasure = @unusedTreasures.pop
+      @usedTreasures << treasure
+      treasure #return
+  end
+  
+  def nextMonster()
+    if @unusedMonsters.empty?
+      @usedMonsters.shuffle!
+      @unusedMonsters = @usedMonsters.clone #Funciona porque copia la referencias de un nivel
+      @usedMonsters.clear
+    end
+    monster = @unusedMonsters.pop
+    @usedMonsters << monster
+    monster #return
+  end
   
   def initCards
     initMonsterCardDeck
     initTreasureCardDeck
-    shuffleMonster
+    shuffleMonsters
     shuffleTreasures
+  end
+  
+  def giveTreasureBack(t)
+    @usedTreasures << t
+    @unusedTreasures.delete(t)
+  end
+  
+  def giveMonsterBack(m)
+    @usedMonsters << m
+    @unusedMonsters.delete(m)
   end
   
 end
