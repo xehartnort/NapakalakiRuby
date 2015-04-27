@@ -42,6 +42,7 @@ class Player
   
   def bringToLive 
     @dead = false
+    @level = 1
   end
   
   def incrementLevels(l)
@@ -50,7 +51,6 @@ class Player
   
   def decrementLevels(l)
     if @level-l < 1
-      @level = 1
       die #Mata si el nivel baja de 1? Sí, míralo
     else
       @level = @level - l
