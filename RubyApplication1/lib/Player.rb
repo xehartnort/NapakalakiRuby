@@ -42,7 +42,6 @@ class Player
   
   def bringToLive 
     @dead = false
-    @level = 1
   end
   
   def incrementLevels(l)
@@ -70,7 +69,8 @@ class Player
       @dealer.giveTreasureBack(t)
     end
     @hiddenTreasures.clear
-    @dead=true
+    @level = 1
+    @dead = true
   end
   
   def discardNecklaceIfVisible

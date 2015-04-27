@@ -88,7 +88,7 @@ class BadConsequence
             newVisibleTreasuresBad << t.type
           end
         else
-            newVisibleTreasuresBad << t.type
+          newVisibleTreasuresBad << t.type
         end
       end
       add=true
@@ -100,16 +100,16 @@ class BadConsequence
             newHiddenTreasuresBad << t.type
           end
         else
-            newHiddenTreasuresBad << t.type
+          newHiddenTreasuresBad << t.type
         end
       end
-      BadConsequence.newSpecificTreasures(@text, @levels, newVisibleTreasuresBad, newHiddenTreasuresBad)
+      BadConsequence.newSpecificTreasures(@text, 0, newVisibleTreasuresBad, newHiddenTreasuresBad)
     else
 #     Número de tesoros visibles a quitar 
       minVisibleTreasures =  @nVisibleTreasures > v.length ? v.length : @nVisibleTreasures
 #      Número de tesoros ocultos a quitar
       minHiddenTreasures = @nHiddenTreasures > h.length ? h.length : @nHiddenTreasures
-      BadConsequence.newNumberOfTreasures(@text, @levels, minVisibleTreasures, minHiddenTreasures)
+      BadConsequence.newNumberOfTreasures(@text, 0, minVisibleTreasures, minHiddenTreasures)
     end
   end
   
