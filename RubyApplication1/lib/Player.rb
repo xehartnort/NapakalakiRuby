@@ -26,6 +26,7 @@ class Player
     @dealer = CardDealer.instance
   end
   
+  private
   def bringToLive 
     @dead = false
   end
@@ -73,6 +74,7 @@ class Player
   def canIBuyLevels(l)
     @level+l<=9 # Gana cuando llega al nivel 10
   end
+  
   protected
   def computeGoldCoinsValue(t)
     levels = 0.0
@@ -81,6 +83,7 @@ class Player
     end
     levels
   end
+  
   public
   def applyPrize(p)
     incrementLevels(p.levels)
@@ -279,14 +282,14 @@ class Player
     text = "\n\tName = " + @name.to_s+" \n\tLevel = " + @level.to_s(10) + " \n\tPendingBadConsequence: { " + @pendingBadConsequence.to_s + "\n\t} \n\tDead = " + @dead.to_s
     textoHiddenTreasures = " \n\tArray Hidden Treasures: { "
     textoVisibleTreasures = " \n\tArray Visible Treasures: { "
-    if @visibleTreasures.empty?
+    unless @visibleTreasures.empty?
       @visibleTreasures.each do |t|
         textoVisibleTreasures += t.to_s + " "
       end 
     else
       textoVisibleTreasures += "No tiene ningún tesoro visible. "
     end
-    if @hiddenTreasures.empty?
+    unless @hiddenTreasures.empty?
       @hiddenTreasures.each do |t|
         textoHiddenTreasures += t.to_s + " "
       end 
@@ -294,26 +297,11 @@ class Player
       textoHiddenTreasures += "No tiene ningún tesoro oculto. "
     end
     text += textoHiddenTreasures + "}" + textoVisibleTreasures + "}"
-    text
   end 
 end
 
 #main
 if __FILE__ == $0 
-  yo = Player.new("Dani")
-  print "Estoy muerto? ", yo.dead, "\n"
-  yo.bringToLive
-  print "Y ahora? ",yo.dead, "\n"
-  yo.incrementLevels(20)
-  print "Con nivel ", yo.getCombatLevel," puedo comprar niveles? ", yo.canIBuyLevels(1), "\n"
-  yo.decrementLevels(11)
-  print "Y con nivel ", yo.getCombatLevel, "? ", yo.canIBuyLevels(1), "\n"
-  yo.decrementLevels(2)
-  print "Pero con ", yo.getCombatLevel," niveles sí, verdad? ", yo.canIBuyLevels(1), "\n"
-  print "Tengo algún tesoro visible? ", yo.hasVisibleTreasures, "\n"
-  print "Perooo estoy en un estado válido???? ", yo.validState, "\n"
-  print "Pues bueno, estuvo bonito mientras duró, adios mundo cruel ", yo.dieIfNoTreasures, "\n"
-  print "Venga ya, enserio, qué me he muerto? ", yo.dead, "\n"
   for i in 0..15
     puts i
   end
