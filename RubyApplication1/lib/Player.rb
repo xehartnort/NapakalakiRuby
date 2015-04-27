@@ -30,7 +30,8 @@ class Player
     @dealer = CardDealer.instance
   end
   
-  private
+  private ########################### Zona privada #############################
+  
   def bringToLive 
     @dead = false
   end
@@ -79,7 +80,8 @@ class Player
     @level+l<=9 # Gana cuando llega al nivel 10
   end
   
-  protected
+  protected ########################### Zona protegida #########################
+  
   def computeGoldCoinsValue(t)
     levels = 0.0
     t.each do |i|
@@ -88,7 +90,8 @@ class Player
     levels
   end
   
-  public
+  public ########################### Zona pública #############################
+  
   def applyPrize(p)
     incrementLevels(p.levels)
         for i in 1..p.treasures
@@ -141,7 +144,8 @@ class Player
   def canMakeTreasureVisible(t)
     @visibleTreasure << t #inserta al final del array el objeto t
     canI = true
-    valido = [false, false, false, false, false, false]
+#    valido = [false, false, false, false, false, false]
+    valido = Array.new(6, false) # array de 6 componentes, todas a false
     @vivibleTreasure.each do |i|
       case i.type
         when TreasureKind::ARMOR
@@ -251,7 +255,7 @@ class Player
       combatLevel += t.minBonus
       combatLevelCollar += t.maxBonus
     end
-    collar==true ? combatLevelCollar : combatLevel
+    collar==true ? combatLevelCollar : combatLevel  #return
   end
   
   def validState
@@ -271,8 +275,8 @@ class Player
 #   Versión compacta
     numeroTesoros = 3 if tirada==6
     numeroTesoros = 1 if tirada == 1
-    for i in 1..numeroTesoros
-      @hiddenTeasure.insert << @dealer.nextTreasure
+    for i in 1..numeroTesoros do
+      @hiddenTeasure << @dealer.nextTreasure
     end
   end
   
@@ -280,8 +284,12 @@ class Player
     !@visibleTreasures.empty?
   end
   
-  def to_s
-    text = "\n\tName = " + @name.to_s+" \n\tLevel = " + @level.to_s(10) + " \n\tPendingBadConsequence: { " + @pendingBadConsequence.to_s + "\n\t} \n\tDead = " + @dead.to_s
+  def to_s #level.to_s no necesita el 10, por defecto se elige la base 10
+    text = "\n\tName = " + @name.to_s+
+          "\n\tLevel = " + @level.to_s + 
+          "\n\tPendingBadConsequence: { " + 
+          @pendingBadConsequence.to_s + "\n\t} "+
+          "\n\tDead = " + @dead.to_s
     textoHiddenTreasures = " \n\tArray Hidden Treasures: { "
     textoVisibleTreasures = " \n\tArray Visible Treasures: { "
     unless @visibleTreasures.empty?
@@ -298,7 +306,7 @@ class Player
     else
       textoHiddenTreasures += "No tiene ningún tesoro oculto. "
     end
-    text += textoHiddenTreasures + "}" + textoVisibleTreasures + "}"
+    text += textoHiddenTreasures + "}" + textoVisibleTreasures + "}" #return
   end 
   
 end
