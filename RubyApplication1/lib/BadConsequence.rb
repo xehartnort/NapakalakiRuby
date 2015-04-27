@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 require_relative 'Treasures.rb'
-
+module Model
 class BadConsequence
   
   ########## Constructores ##########
@@ -148,3 +148,4 @@ class BadConsequence
   
 end
 
+end

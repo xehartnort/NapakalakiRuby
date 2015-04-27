@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
-
+module Model
 class Monster
 =begin
 Constructor que crea y asigna las variables 
@@ -24,4 +24,5 @@ tercero el mal rollo y el cuarto el premio
 #Métodos para leer valores de variables de instancia 
   attr_reader :name, :combatLevel, :bc, :prize
 
+end
 end

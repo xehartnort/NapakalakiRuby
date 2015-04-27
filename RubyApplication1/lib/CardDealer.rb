@@ -7,7 +7,7 @@ require_relative 'BadConsequence.rb'
 require_relative 'Prize.rb'
 require 'singleton'
 
-
+module Model
 class CardDealer
   include Singleton #Alé y a pastá
   
@@ -311,7 +311,5 @@ class CardDealer
   end
   
 end
-if __FILE__==$0
-  e=CardDealer.instance
-  e.initCards
+
 end

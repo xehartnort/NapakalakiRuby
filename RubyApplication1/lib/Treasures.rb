@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 require_relative 'TreasureKind.rb'
-
+module Model
 class Treasure
   
 #  @name string
@@ -32,4 +32,5 @@ end
 if __FILE__ == $0
   tesorito=Treasure.new("Anillo del poder", 1000000000, 9999, -2, TreasureKind::ONEHAND)
   puts "Mi tesoorooo: ", tesorito.name, tesorito.goldCoins, tesorito.minBonus, tesorito.maxBonus, tesorito.type
+end
 end

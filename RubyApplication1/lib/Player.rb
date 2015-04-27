@@ -9,7 +9,7 @@ require_relative 'Cartas.rb'
 require_relative 'Treasures.rb'
 require_relative 'CardDealer.rb'
 require_relative 'Dice.rb'
-
+module Model
 # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION
 # Mucho cuidado con delete, que borra todas las ocurrencias de un dato
 # no solo uno
@@ -319,4 +319,6 @@ class Player
     text += textoHiddenTreasures + "}" + textoVisibleTreasures + "}" #return
   end 
   
+end
+
 end

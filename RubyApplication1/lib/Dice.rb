@@ -2,7 +2,7 @@
 # encoding: UTF-8
 
 require 'singleton'
-
+module Model
 class Dice
   
   include Singleton
@@ -17,7 +17,4 @@ class Dice
   
 end
 
-#main
-if __FILE__== $0
-  print Dice.instance.nextNumber
 end

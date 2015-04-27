@@ -10,6 +10,7 @@ require_relative 'Dice.rb'
 require_relative 'CombatResult.rb'
 require 'singleton'
 
+module Model
 class Napakalaki
   include Singleton
 
@@ -99,4 +100,5 @@ class Napakalaki
     result==CombatResult::WINANDWINGAME #return
   end
   
+end
 end
