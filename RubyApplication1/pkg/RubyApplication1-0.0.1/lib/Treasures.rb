@@ -3,11 +3,12 @@
 require_relative 'TreasureKind.rb'
 
 class Treasure
-  @name #string
-  @goldCoins #int
-  @minBonus #int
-  @maxBonus #int
-  @type #TreasureKind
+  
+#  @name string
+#  @goldCoins int
+#  @minBonus int
+#  @maxBonus int
+#  @type TreasureKind
   
   attr_reader :name, :goldCoins, :minBonus, :maxBonus, :type
   
@@ -18,4 +19,17 @@ class Treasure
     @maxBonus=max
     @type=t
   end
+  def to_s
+    "\n\tTesoro: " + name + 
+    "\n\t\tGoldBonus: " + Integer.toString(goldBonus) + 
+    "\n\t\tMinBonus: " + Integer.toString(minBonus) + 
+    "\n\t\tMaxBonus: " + Integer.toString(maxBonus) +
+    "\n\t\tTreasureKind: " + type
+  end
+end
+
+#main
+if __FILE__ == $0
+  tesorito=Treasure.new("Anillo del poder", 1000000000, 9999, -2, TreasureKind::ONEHAND)
+  puts "Mi tesoorooo: ", tesorito.name, tesorito.goldCoins, tesorito.minBonus, tesorito.maxBonus, tesorito.type
 end

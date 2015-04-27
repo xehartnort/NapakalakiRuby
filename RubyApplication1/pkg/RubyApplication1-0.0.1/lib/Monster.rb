@@ -5,8 +5,8 @@ class Monster
 =begin
 Constructor que crea y asigna las variables 
 de instancia el primer valor sera el nombre 
-de mostruo, el segundo sera su nivel, el 
-tercero el mal royo y el cuarto el premio
+de monstruo, el segundo será su nivel, el 
+tercero el mal rollo y el cuarto el premio
 =end
   def initialize(name, level, bc, prize)
     @name = name
@@ -14,16 +14,14 @@ tercero el mal royo y el cuarto el premio
     @prize = prize
     @bc = bc
   end
-=begin
-Metodo to_s devuelve los variables de instacia en un String
-=end
+
+#Método to_s devuelve los variables de instacia en un String
+
   def to_s
-    string = "\nNombre: "+name+"\nNivel: "+combatLevel.to_s+"\nMal royo: "+bc.to_s+"\nPremios: "+ prize.to_s+"\n"
-    return string
+    "Nombre: "+@name+"\nNivel: "+@combatLevel.to_s+"\nMal rollo: "+@bc.to_s+"\nPremios: "+@prize.to_s#return
   end
-=begin
-Metodo para leer valores de variables de instancia 
-=end
+
+#Métodos para leer valores de variables de instancia 
   attr_reader :name, :combatLevel, :bc, :prize
 
 end

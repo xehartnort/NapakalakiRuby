@@ -7,12 +7,17 @@ class Dice
   
   include Singleton
   
-  def setf.getInstance
-    returm Dice.instance
-  end
+#  def setf.getInstance
+#    return Dice.instance
+#  end
   
   def nextNumber
     return rand(6)+1
   end
   
+end
+
+#main
+if __FILE__== $0
+  print Dice.instance.nextNumber
 end

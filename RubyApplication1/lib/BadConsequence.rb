@@ -76,9 +76,9 @@ class BadConsequence
   end
 
   def adjustToFitTreasureLists(v, h)#v:Treasure[], h:Treasure[]
-    newVisibleTreasuresBad = Array.new
-    newHiddenTreasuresBad = Array.new
     if !@specificVisibleTreasures.empty? || !@specificHiddenTreasures.empty?
+      newVisibleTreasuresBad = Array.new
+      newHiddenTreasuresBad = Array.new
       add=true
       
       v.each do |t|
@@ -103,15 +103,13 @@ class BadConsequence
             newHiddenTreasuresBad << t.type
         end
       end
-      
-    BadConsequence.newSpecificTreasures(@text, @levels, newVisibleTreasuresBad, newHiddenTreasuresBad)
+      BadConsequence.newSpecificTreasures(@text, @levels, newVisibleTreasuresBad, newHiddenTreasuresBad)
     else
 #     Número de tesoros visibles a quitar 
       minVisibleTreasures =  @nVisibleTreasures > v.length ? v.length : @nVisibleTreasures
 #      Número de tesoros ocultos a quitar
       minHiddenTreasures = @nHiddenTreasures > h.length ? h.length : @nHiddenTreasures
-    
-    BadConsequence.newNumberOfTreasures(@text, @levels, minVisibleTreasures, minHiddenTreasures)
+      BadConsequence.newNumberOfTreasures(@text, @levels, minVisibleTreasures, minHiddenTreasures)
     end
   end
   
