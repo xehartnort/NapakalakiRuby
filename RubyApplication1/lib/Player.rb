@@ -19,7 +19,7 @@ class Player
   @@MAXHIDDENTREASURES=4
 
   attr_reader :visibleTreasures, :hiddenTreasures, :dead
-  attr_writter :pendingBadConsequence
+  attr_writer :pendingBadConsequence
   
   def initialize(name)
     @level = 1
