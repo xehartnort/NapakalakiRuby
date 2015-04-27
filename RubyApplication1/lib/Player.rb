@@ -251,7 +251,7 @@ class Player
   end
   
   def validState
-    @pendingBadConsequence.isEmpty? && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
+    @pendingBadConsequence.isEmpty && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
   end
   
   def initTreasures
