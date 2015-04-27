@@ -279,21 +279,3 @@ class Player
     text
   end 
 end
-
-#main
-if __FILE__ == $0 
-  yo = Player.new("Dani")
-  print "Estoy muerto? ", yo.dead, "\n"
-  yo.bringToLife
-  print "Y ahora? ", yo.dead, "\n"
-  yo.incrementLevels(20)
-  print "Con nivel ", yo.getCombatLevel," puedo comprar niveles? ", yo.canIBuyLevels(1), "\n"
-  yo.decrementLevels(11)
-  print "Y con nivel ", yo.getCombatLevel, "? ", yo.canIBuyLevels(1), "\n"
-  yo.decrementLevels(2)
-  print "Pero con ", yo.getCombatLevel," niveles sí, verdad? ", yo.canIBuyLevels(1), "\n"
-  print "Tengo algún tesoro visible? ", yo.hasVisibleTreasures, "\n"
-  print "Perooo estoy en un estado válido???? ", yo.validState, "\n"
-  print "Pues bueno, estuvo bonito mientras duró, adios mundo cruel ", yo.dieIfNoTreasures, "\n"
-  print "Venga ya, enserio, qué me he muerto? ", yo.dead, "\n"
-end
