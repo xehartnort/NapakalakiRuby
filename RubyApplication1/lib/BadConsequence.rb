@@ -115,7 +115,7 @@ class BadConsequence
         newHiddenTreasuresBad << h[i].type
       end
     end
-    BadConsequence.new(@text, @levels, newVisibleTreasuresBad, newHiddenTreasuresBad) #return
+    BadConsequence.newSpecificTreasures(@text, @levels, newVisibleTreasuresBad, newHiddenTreasuresBad) #return
   end
   
   def to_s
