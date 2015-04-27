@@ -167,7 +167,7 @@ class CardDealer
   
   
     #Los hondos
-    badConsequence = BadConsequence.newDeath("Estos  unusedMonsters resultan "+
+    badConsequence = BadConsequence.newDeath("Estos resultan "+
                                             "\n\tbastante superficiales y te aburren "+
                                             "\n\tmortalmente. Estas muerto")
     prize = Prize.new(2,1)
