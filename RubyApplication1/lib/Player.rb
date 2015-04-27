@@ -273,7 +273,7 @@ class Player
         textoHiddenTreasures += t.to_s + " "
       end 
     else
-      textoHiddenTreasures += "No tiene ningún tesoro visible. "
+      textoHiddenTreasures += "No tiene ningún tesoro oculto. "
     end
     text += textoHiddenTreasures + "}" + textoVisibleTreasures + "}"
     text
