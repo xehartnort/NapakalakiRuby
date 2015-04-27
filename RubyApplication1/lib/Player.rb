@@ -7,6 +7,8 @@ require_relative 'Monster.rb'
 require_relative 'BadConsequence.rb'
 require_relative 'Cartas.rb'   
 require_relative 'Treasures.rb'
+require_relative 'CardDealer.rb'
+require_relative 'Dice,rb'
 
 class Player
 
@@ -249,7 +251,7 @@ class Player
   end
   
   def validState
-    @pendingBadConsequence.empty? && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
+    @pendingBadConsequence.isEmpty? && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
   end
   
   def initTreasures
