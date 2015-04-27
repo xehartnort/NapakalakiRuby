@@ -26,7 +26,7 @@ class Player
     @dealer = CardDealer.instance
   end
   
-  def bringToLife 
+  def bringToLive 
     @dead = false
   end
   
@@ -35,8 +35,8 @@ class Player
   end
   
   def decrementLevels(l)
-    if @level-l <= 0
-      die #Mata si el nivel baja de 1?
+    if @level-l < 1
+      die #Mata si el nivel baja de 1? Sí, míralo
     else
       @level = @level - l
     end
@@ -76,31 +76,32 @@ class Player
   end
   
   def computeGoldCoinsValue(t)
-    niveles = 0.0
+    levels = 0.0
     t.each do |i|
-      nivles += (i.goldCoins/1000)
+      levels += (i.goldCoins/1000)
     end
-    niveles
+    levels
   end
   
   def applyPrize(p)
     incrementLevels(p.levels)
-        for i in (1..p.treasures)
-          @hiddenTreasures.push(@dealer.nextTreasure)
+        for i in 1..p.treasures
+          @hiddenTreasures << @dealer.nextTreasure
         end
   end
   
   def combat(m)
     combate = CombatResult::LOSEANDESCAPE
-        if getCombatLevel > m.combatLevel
-            applyPrize(m.prize)
-            if @level > 9 
-              combate = CombatResult::WINANDWINGAME
-            else
-              combate = CombatResult.WIN;
-            end
-        else 
-        if Dice.instance.nextNumber<5
+      if getCombatLevel > m.combatLevel
+        applyPrize(m.prize)
+        if @level > 9 
+          combate = CombatResult::WINANDWINGAME
+        else
+          combate = CombatResult.WIN;
+        end
+#      else
+#        if Dice.instance.nextNumber<5
+      elsif Dice.instance.nextNumber<5
           if m.bc.death
               die
               combate = CombatResult::LOSEANDDIE
@@ -108,17 +109,17 @@ class Player
               applyBadConsequence(m.bc)
               combate = CombatResult::LOSE
           end
-        end
-        end
-        discardNecklaceIfVisible
-        combate
+      end
+      discardNecklaceIfVisible
+      combate
   end
   
   def applyBadConsequence(b)
-    if b.levels !=0
-      decrementLevels(b.levels)
-    end
-    bad=b.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
+#    if b.levels !=0
+#      decrementLevels(b.levels)
+#    end
+    decrementLevels(b.levels) if b.levels!=0
+    bad = b.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
     setPendingBadConsequence(bad)
   end
   
@@ -137,59 +138,69 @@ class Player
     valido = [false, false, false, false, false, false]
     @vivibleTreasure.each do |i|
       case i.type
-      when TreasureKind::ARMOR
-        if valido[0]
-          canI=false
-        else
-          valido.delete_at(0)
-          valido.insert(0, true)
-        end
-      when TreasureKind::BOTHHANDS
-        if valido[3]||valido[4]
-          canI=false
-        else
-          valido.delete_at(3)
-          valido.insert(3, true)
-          valido.delete_at(4)
-          valido.insert(3, true)
-        end
-      when TreasureKind::HELMET
-        if valido[1]
-          canI=false
-        else
-          valido.delete_at(1)
-          valido.insert(1, true)
-        end
-      when TreasureKind::NECKLACE
-        if valido[2]
-          canI = true;
-        else
-          valido.delete_at(2)
-          valido.insert(2, true)
-        end
-      when TreasureKind::ONEHAND
-        if valido[3]
-          if valido[4]
+        when TreasureKind::ARMOR
+          if valido[0]
             canI = false
           else
-            valido.delete_at(4)
-            valido.insert(4, true)
+#          ¿¿¿¿ no es eso lo mismo que hacer ????
+          valido[0] = true
+#            valido.delete_at(0)
+#            valido.insert(0, true)
+          end
+        when TreasureKind::BOTHHANDS
+          if valido[3] || valido[4]
+            canI = false
+          else 
+#           valido.delete_at(3)
+#           valido.insert(3, true)
+#           valido.delete_at(4)
+#           valido.insert(4, true)
+#          ¿¿¿¿ no es eso lo mismo que hacer ????
+          valido[3] = true
+          valido[4] = true
+          end
+        when TreasureKind::HELMET
+          if valido[1]
+            canI = false
+          else
+#           valido.delete_at(1)
+#           valido.insert(1, true)
+            valido[1] = true
+          end
+        when TreasureKind::NECKLACE
+          if valido[2]
+            canI = true;
+          else
+#            valido.delete_at(2)
+#            valido.insert(2, true)
+            valido[2] = true
+          end
+        when TreasureKind::ONEHAND
+          if valido[3]
+            if valido[4]
+              canI = false
+            else
+#            valido.delete_at(4)
+#            valido.insert(4, true)
+              valido[4] = true
+            end
+          else
+#          valido.delete_at(3)
+#          valido.insert(3, true)
+            valido[3] = true
           end
         else
-          valido.delete_at(3)
-          valido.insert(3, true)
-        end
-      else
-        if valido[5]
-          canI=true
-        else
-          valido.delete_at(5)
-          valido.insert(5, true)
-        end
+          if valido[5]
+            canI = true
+          else
+#            valido.delete_at(5)
+#            valido.insert(5, true)
+            valido[5] = true
+          end
       end
     end
     @visibleTreasures.delete(t)
-    canI
+    canI  #return
   end
   
   def discardVisibleTreasure(t)
@@ -223,7 +234,7 @@ class Player
         discardHiddenTreasure(t)
       end 
     end
-    canI
+    canI  #return
   end
   
   def getCombatLevel
@@ -251,21 +262,24 @@ class Player
   end
   
   def validState
-    @pendingBadConsequence.isEmpty? && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
+    @pendingBadConsequence.isEmpty && @hiddenTreasures.size<=@@MAXHIDDENTREASURES
   end
   
   def initTreasures
     bringToLive
     tirada = Dice.instance.nextNumber
-    numeroTesoros=2
-    if tirada==6
-      numeroTesoros=3
-    end
-    if tirada==1
-      numeroTesoros=1
-    end
-    for i in (0..numeroTesoros)
-      @hiddenTeasure.insert(-1, @dealer.nextTreasure)
+    numeroTesoros = 2
+#    if tirada==6
+#      numeroTesoros=3
+#    end
+#    if tirada==1
+#      numeroTesoros=1
+#    end
+#   Versión compacta
+    numeroTesoros = 3 if tirada==6
+    numeroTesoros = 1 if tirada == 1
+    for i in 1..numeroTesoros
+      @hiddenTeasure.insert << @dealer.nextTreasure
     end
   end
   
@@ -279,8 +293,8 @@ end
 if __FILE__ == $0 
   yo = Player.new("Dani")
   print "Estoy muerto? ", yo.dead, "\n"
-  yo.bringToLife
-  print "Y ahora? ", yo.dead, "\n"
+  yo.bringToLive
+  print "Y ahora? ",yo.dead, "\n"
   yo.incrementLevels(20)
   print "Con nivel ", yo.getCombatLevel," puedo comprar niveles? ", yo.canIBuyLevels(1), "\n"
   yo.decrementLevels(11)
@@ -291,4 +305,7 @@ if __FILE__ == $0
   print "Perooo estoy en un estado válido???? ", yo.validState, "\n"
   print "Pues bueno, estuvo bonito mientras duró, adios mundo cruel ", yo.dieIfNoTreasures, "\n"
   print "Venga ya, enserio, qué me he muerto? ", yo.dead, "\n"
+  for i in 0..15
+    puts i
+  end
 end
