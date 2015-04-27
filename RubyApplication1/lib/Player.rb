@@ -50,6 +50,7 @@ class Player
   
   def decrementLevels(l)
     if @level-l < 1
+      @level = 1
       die #Mata si el nivel baja de 1? Sí, míralo
     else
       @level = @level - l
@@ -69,6 +70,7 @@ class Player
       @dealer.giveTreasureBack(t)
     end
     @hiddenTreasures.clear
+    @dead=true
   end
   
   def discardNecklaceIfVisible
