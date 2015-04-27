@@ -18,9 +18,8 @@ class Player
 
   @@MAXHIDDENTREASURES=4
 
-  attr_reader :visibleTreasures, :hiddenTreasures, :dead
-  attr_writter :pendingBadConsequence
-  
+  attr_reader :dead
+
   def initialize(name)
     @level = 1
     @name = name
@@ -29,6 +28,14 @@ class Player
     @hiddenTreasures = Array.new
     @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
     @dealer = CardDealer.instance
+  end
+  
+  def getVisibleTreasures
+    @visibleTreasures
+  end
+  
+  def getHiddenTreasures
+    @hiddenTreasures
   end
   
   private ########################### Zona privada #############################
@@ -49,10 +56,9 @@ class Player
     end
   end
 
-#  Se añadió attr_writter   
-#  def setPendingBadConsequence(b)
-#    @pendingBadConsequence = b
-#  end
+  def setPendingBadConsequence(b)
+    @pendingBadConsequence = b
+  end
   
   def die
     @visibleTreasures.each do |t| 
@@ -133,7 +139,7 @@ class Player
 #    end
     decrementLevels(b.levels) if b.levels!=0
     bad = b.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
-    @pendingBadConsequence = bad
+    setPendingBadConsequence(bad)
   end
   
   def makeTreasureVisible(t)
@@ -280,7 +286,7 @@ class Player
     numeroTesoros = 3 if tirada==6
     numeroTesoros = 1 if tirada == 1
     for i in 1..numeroTesoros do
-      @hiddenTeasure << @dealer.nextTreasure
+      @hiddenTreasures << @dealer.nextTreasure
     end
   end
   
