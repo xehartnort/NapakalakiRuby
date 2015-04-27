@@ -20,11 +20,11 @@ class Treasure
     @type=t
   end
   def to_s
-    "\n\tTesoro: " + name + 
-    "\n\t\tGoldBonus: " + Integer.toString(goldBonus) + 
-    "\n\t\tMinBonus: " + Integer.toString(minBonus) + 
-    "\n\t\tMaxBonus: " + Integer.toString(maxBonus) +
-    "\n\t\tTreasureKind: " + type
+    "\n\tTesoro: " + @name + 
+    "\n\t\tGoldBonus: " + @goldCoins.to_s + 
+    "\n\t\tMinBonus: " + @minBonus.to_s + 
+    "\n\t\tMaxBonus: " + @maxBonus.to_s +
+    "\n\t\tTreasureKind: " + @type.to_s
   end
 end
 
