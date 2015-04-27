@@ -19,6 +19,7 @@ class Player
   @@MAXHIDDENTREASURES=4
 
   attr_reader :visibleTreasures, :hiddenTreasures, :dead
+  attr_writter :pendingBadConsequence
   
   def initialize(name)
     @level = 1
@@ -47,10 +48,11 @@ class Player
       @level = @level - l
     end
   end
-  
-  def setPendingBadConsequence(b)
-    @pendingBadConsequence = b
-  end
+
+#  Se añadió attr_writter   
+#  def setPendingBadConsequence(b)
+#    @pendingBadConsequence = b
+#  end
   
   def die
     @level=1
@@ -60,12 +62,14 @@ class Player
     @hiddenTreasures.each  do |t| 
       discardHiddenTreasure(t)
     end
+    @dead = true # lo mata
   end
   
   def discardNecklaceIfVisible
     @visibleTreasures.each do |t|
       if t.type == TreasureKind::NECKLACE
-        discardVisibleTreasure(t)
+        @dealer.giveTreasureBack(t)
+        @visibleTreasures.delete(t)
       end
     end
   end
@@ -94,9 +98,9 @@ class Player
   
   def applyPrize(p)
     incrementLevels(p.levels)
-        for i in 1..p.treasures
-          @hiddenTreasures << @dealer.nextTreasure
-        end
+      for i in 1..p.treasures
+        @hiddenTreasures << @dealer.nextTreasure
+      end
   end
   
   def combat(m)
@@ -129,7 +133,7 @@ class Player
 #    end
     decrementLevels(b.levels) if b.levels!=0
     bad = b.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
-    setPendingBadConsequence(bad)
+    @pendingBadConsequence = bad
   end
   
   def makeTreasureVisible(t)
@@ -209,7 +213,7 @@ class Player
           end
       end
     end
-    @visibleTreasures.pop
+    @visibleTreasures.delete(t)
     canI  #return
   end
   
@@ -287,8 +291,7 @@ class Player
   def to_s #level.to_s no necesita el 10, por defecto se elige la base 10
     text = "\n\tName = " + @name.to_s+
           "\n\tLevel = " + @level.to_s + 
-          "\n\tPendingBadConsequence: { " + 
-          @pendingBadConsequence.to_s + "\n\t} "+
+          "\n\tPendingBadConsequence: { " + @pendingBadConsequence.to_s + "\n\t} "+
           "\n\tDead = " + @dead.to_s
     textoHiddenTreasures = " \n\tArray Hidden Treasures: { "
     textoVisibleTreasures = " \n\tArray Visible Treasures: { "
@@ -299,6 +302,7 @@ class Player
     else
       textoVisibleTreasures += "No tiene ningún tesoro visible. "
     end
+    
     unless @hiddenTreasures.empty?
       @hiddenTreasures.each do |t|
         textoHiddenTreasures += t.to_s + " "

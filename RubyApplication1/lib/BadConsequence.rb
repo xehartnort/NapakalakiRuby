@@ -40,7 +40,12 @@ class BadConsequence
   
   def substractVisibleTreasure(t)#Treasure t
     if @nVisibleTreasures==0
-      @specificVisibleTreasures.delete(t.type)
+      if @specificVisibleTreasures.count(t.type)==1 #Si hay solo uno
+        @specificVisibleTreasures.delete(t.type)
+      else # si hay más de uno, sólo borramos el primero
+        i = @specificVisibleTreasures.find_index(t.type)
+        @specificVisibleTreasures.delete_at(i)
+      end
     else
       @nVisibleTreasures = (@nVisibleTreasures-1) < 0 ? 0 : @nVisibleTreasures-1 ;
 #     Exactamente igual que en java, if else compacto
@@ -49,7 +54,12 @@ class BadConsequence
   
   def substractHiddenTreasure(t)#Treasure t
     if @nHiddenTreasures==0
-      @specificHiddenTreasures.delete(t.type)
+      if @specificHiddenTreasures.count(t.type)==1 #Si hay solo uno
+        @specificHiddenTreasures.delete(t.type)
+      else # si hay más de uno, sólo borramos el primero
+        i = @specificHiddenTreasures.find_index(t.type)
+        @specificHiddenTreasures.delete_at(i)
+      end
     else
       @nHiddenTreasures = (@nHiddenTreasures-1) < 0 ? 0 : @nHiddenTreasures-1 ;
 #     Exactamente igual que en java, if else compacto
@@ -68,41 +78,31 @@ class BadConsequence
   def adjustToFitTreasureLists(v, h)#v:Treasure[], h:Treasure[]
     newVisibleTreasuresBad = Array.new
     newHiddenTreasuresBad = Array.new
-    if !@specificVisibleTreasures.empty?|| !@specificHiddenTreasures.empty?
-      newVisibleTreasuresPlayer = Array.new
-      newHiddenTreasuresPlayer = Array.new
+    if !@specificVisibleTreasures.empty? || !@specificHiddenTreasures.empty?
       add=true
       
       v.each do |t|
         if v.count(t)==2 && @specificVisibleTreasures.count(t.type)==1
           if add
             add = false
-            newVisibleTreasuresPlayer << t
             newVisibleTreasuresBad << t.type
           end
         else
-            newVisibleTreasuresPlayer << t
             newVisibleTreasuresBad << t.type
         end
       end
-      v = newVisibleTreasuresPlayer.empty? ? v : newVisibleTreasuresPlayer
       add=true
       
       h.each do |t|
         if h.count(t)==2 && @specificHiddenTreasures.count(t.type)==1
           if add
             add = false
-            newHiddenTreasuresPlayer << t
             newHiddenTreasuresBad << t.type
           end
         else
-            newHiddenTreasuresPlayer << t
             newHiddenTreasuresBad << t.type
         end
       end
-      
-      h = newHiddenTreasuresPlayer.isEmpty() ? h : newHiddenTreasuresPlayer
-     
     else
 #     Número de tesoros visibles a quitar 
       minVisibleTreasures =  @nVisibleTreasures > v.length ? v.length : @nVisibleTreasures
