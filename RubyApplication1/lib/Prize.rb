@@ -16,7 +16,7 @@ gana el jugador al derrotar al mostruo
 # Método to_s devuelve los variables de instacia en un String
 
   def to_s
-    "\n\tNumero de tesoros: "+@treasures.to_s+"\n\tNiveles: "+@levels.to_s #return
+    "\n\tNumero de tesoros: "+@treasures.to_s+"\n\tNiveles: "+@levels.to_s + "\n"#return
   end
 
 # Método para leer valores de variables de instancia 
