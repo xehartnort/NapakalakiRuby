@@ -299,10 +299,3 @@ class Player
     text += textoHiddenTreasures + "}" + textoVisibleTreasures + "}"
   end 
 end
-
-#main
-if __FILE__ == $0 
-  for i in 0..15
-    puts i
-  end
-end
