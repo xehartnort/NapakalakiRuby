@@ -8,7 +8,7 @@ require_relative 'BadConsequence.rb'
 require_relative 'Cartas.rb'   
 require_relative 'Treasures.rb'
 require_relative 'CardDealer.rb'
-require_relative 'Dice,rb'
+require_relative 'Dice.rb'
 
 class Player
 
