@@ -244,7 +244,7 @@ class Player
   def buyLevels(visible, hidden)
     levels = computeGoldCoinsValue(visible)
     levels += computeGoldCoinsValue(hidden)
-    canI = canIBuyLevels(levels)
+    canI = canIBuyLevels(levels.to_i)
     if canI
       incrementLevels(levels)
       visible.each do |t|
