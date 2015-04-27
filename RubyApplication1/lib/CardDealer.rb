@@ -277,9 +277,8 @@ class CardDealer
       @unusedTreasures = @usedTreasures.clone
       @usedTreasures.clear
     end
-      treasure = @unusedTreasures.last
-      @unusedTreasures.delete(treasure)
-      @usedTreasures.add(treasure)
+      treasure = @unusedTreasures.pop
+      @usedTreasures << treasure
       treasure #return
   end
   
@@ -289,9 +288,8 @@ class CardDealer
       @unusedMonsters = @usedMonsters.clone #Funciona porque copia la referencias de un nivel
       @usedMonsters.clear
     end
-    monster = @unusedMonsters.last
-    @unusedMonsters.delete(monster)
-    @usedMonsters.add(monster)
+    monster = @unusedMonsters.pop
+    @usedMonsters << monster
     monster #return
   end
   
