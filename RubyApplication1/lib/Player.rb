@@ -152,11 +152,11 @@ class Player
   end
   
   def canMakeTreasureVisible(t)
-    @visibleTreasure << t #inserta al final del array el objeto t
+    @visibleTreasures << t #inserta al final del array el objeto t
     canI = true
 #    valido = [false, false, false, false, false, false]
     valido = Array.new(6, false) # array de 6 componentes, todas a false
-    @vivibleTreasure.each do |i|
+    @visibleTreasures.each do |i|
       case i.type
         when TreasureKind::ARMOR
           if valido[0]
