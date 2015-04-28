@@ -45,7 +45,7 @@ class Player
   end
   
   def incrementLevels(l)
-     @level= @level+l
+    @level+=l    
   end
   
   def decrementLevels(l)
@@ -97,7 +97,7 @@ class Player
   def computeGoldCoinsValue(t)
     levels = 0.0
     t.each do |i|
-      levels += (i.goldCoins/1000)
+      levels += (i.goldCoins.to_f/1000)
     end
     levels
   end
@@ -120,8 +120,6 @@ class Player
         else
           combate = CombatResult::WIN;
         end
-#      else
-#        if Dice.instance.nextNumber<5
       elsif Dice.instance.nextNumber<5
           if m.bc.death
               die
@@ -131,7 +129,7 @@ class Player
               combate = CombatResult::LOSE
           end
       end
-      discardNecklaceIfVisible
+      #discardNecklaceIfVisible esto
       combate
   end
   
@@ -246,7 +244,7 @@ class Player
   def buyLevels(visible, hidden)
     levels = computeGoldCoinsValue(visible)
     levels += computeGoldCoinsValue(hidden)
-    canI = canIBuyLevels(levels.to_i)
+    canI = canIBuyLevels(levels)
     if canI
       incrementLevels(levels)
       visible.each do |t|
@@ -267,7 +265,12 @@ class Player
       combatLevel += t.minBonus
       combatLevelCollar += t.maxBonus
     end
-    collar==true ? combatLevelCollar : combatLevel  #return
+    if (combatLevelCollar!=combatLevel) && collar
+      discardNecklaceIfVisible
+      combatLevelCollar # return
+    else
+      combatLevel # return
+    end
   end
   
   def validState
