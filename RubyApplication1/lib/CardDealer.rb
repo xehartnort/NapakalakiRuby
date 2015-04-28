@@ -110,7 +110,7 @@ class CardDealer
     # El primer array de badConsequence es specificVisibleTreasures, 
     # el segundo specificHiddenTreasures
     # Análogamente si no es array es nVisibleTreasures y nHiddenTreasures
-    badConsequence = BadConsequence.newNumberOfTreasures("Pierdes todos tus tesores visibles.", 
+    badConsequence = BadConsequence.newNumberOfTreasures("Pierdes todos tus tesoros visibles.", 
                                                         1, 9999, 0)
     prize = Prize.new(3,1)
     # Añade un nuevo monstruo al final del array
@@ -240,7 +240,7 @@ class CardDealer
   
     #Bicéfalo
     badConsequence = BadConsequence.newNumberOfTreasures("Te faltan manos para" +
-                                                         "\n\tanta cabeza. Pierdes 3 niveles y tus" +
+                                                         "\n\ttanta cabeza. Pierdes 3 niveles y tus" +
                                                          "\n\ttesoros visibles de las manos.",
                                                          3,9999,0)
     prize = Prize.new(1, 1)
