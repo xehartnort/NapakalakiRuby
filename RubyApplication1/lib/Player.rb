@@ -34,6 +34,10 @@ class Player
     @visibleTreasures
   end
   
+  def getName
+    @name
+  end
+  
   def getHiddenTreasures
     @hiddenTreasures
   end
@@ -244,6 +248,7 @@ class Player
   def buyLevels(visible, hidden)
     levels = computeGoldCoinsValue(visible)
     levels += computeGoldCoinsValue(hidden)
+    levels = levels.to_i
     canI = canIBuyLevels(levels)
     if canI
       incrementLevels(levels)

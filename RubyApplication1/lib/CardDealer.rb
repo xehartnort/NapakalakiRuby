@@ -70,8 +70,8 @@ class CardDealer
     # el segundo specificHiddenTreasures
     # Análogamente si no es array es nVisibleTreasures y nHiddenTreasures
     badConsequence = BadConsequence.newSpecificTreasures("Embobados con el lindo" +
-                                                        "primigenio te descartas de tu casco" +
-                                                        "visible",0, 
+                                                        "\n\tprimigenio te descartas de tu casco" +
+                                                        "\n\tvisible",0, 
                                                         [TreasureKind::HELMET], 
                                                         Array.new)
     prize = Prize.new(1, 1)
@@ -84,7 +84,7 @@ class CardDealer
     # el segundo specificHiddenTreasures
     # Análogamente si no es array es nVisibleTreasures y nHiddenTreasures
     badConsequence = BadConsequence.newSpecificTreasures("El primordial bostezo contaguioso." +
-                                                        "Pierdes el calzado visible",0, 
+                                                        "\n\tPierdes el calzado visible",0, 
                                                         [TreasureKind::HELMET], 
                                                         Array.new)
     prize = Prize.new(1,1)
