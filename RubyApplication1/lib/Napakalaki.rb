@@ -45,10 +45,10 @@ class Napakalaki
   def nextPlayer
     if @@firstTurn
       @@firstTurn=false;
-      @currentPlayerIndex = Dice.instance.nextNumber%@players.length
+      @currentPlayerIndex = Dice.instance.nextNumber % @players.size
     else
       @currentPlayerIndex += 1
-      @currentPlayerIndex %= @players.length
+      @currentPlayerIndex %= @players.size
     end
     @currentPlayer = @players.at(@currentPlayerIndex)
   end
@@ -83,8 +83,9 @@ class Napakalaki
 
   def nextTurn
     if nextTurnIsAllowed
+      nextPlayer
       @currentMonster = CardDealer.instance.nextMonster
-      @currentPlayer = nextPlayer
+      #@currentPlayer = nextPlayer El método NextPlayer ya hace la asignación dentro de él
       if @currentPlayer.dead
         @currentPlayer.initTreasures
       end
