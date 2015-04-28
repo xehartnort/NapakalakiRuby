@@ -82,34 +82,38 @@ class BadConsequence
       add=true
       
       v.each do |t|
-        if v.count(t)==2 && @specificVisibleTreasures.count(t.type)==1
-          if add
-            add = false
+        if @specificVisibleTreasures.include? t
+          if v.count(t)==2 && @specificVisibleTreasures.count(t.type)==1
+            if add
+              add = false
+              newVisibleTreasuresBad << t.type
+            end
+          else
             newVisibleTreasuresBad << t.type
           end
-        else
-          newVisibleTreasuresBad << t.type
         end
       end
       add=true
       
       h.each do |t|
-        if h.count(t)==2 && @specificHiddenTreasures.count(t.type)==1
-          if add
-            add = false
+        if @specificHiddenTreasures.include? t
+          if h.count(t)==2 && @specificHiddenTreasures.count(t.type)==1
+            if add
+              add = false
+              newHiddenTreasuresBad << t.type
+            end
+          else
             newHiddenTreasuresBad << t.type
           end
-        else
-          newHiddenTreasuresBad << t.type
         end
       end
-      BadConsequence.newSpecificTreasures(@text, 0, newVisibleTreasuresBad, newHiddenTreasuresBad)
+      BadConsequence.newSpecificTreasures(@text, 0, newVisibleTreasuresBad, newHiddenTreasuresBad) #return
     else
 #     Número de tesoros visibles a quitar 
       minVisibleTreasures =  @nVisibleTreasures > v.length ? v.length : @nVisibleTreasures
 #      Número de tesoros ocultos a quitar
       minHiddenTreasures = @nHiddenTreasures > h.length ? h.length : @nHiddenTreasures
-      BadConsequence.newNumberOfTreasures(@text, 0, minVisibleTreasures, minHiddenTreasures)
+      BadConsequence.newNumberOfTreasures(@text, 0, minVisibleTreasures, minHiddenTreasures) #return
     end
   end
   
