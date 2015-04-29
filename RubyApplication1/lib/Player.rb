@@ -53,11 +53,7 @@ class Player
   end
   
   def decrementLevels(l)
-    if @level-l < 1
-      die #Mata si el nivel baja de 1? Sí, míralo
-    else
-      @level = @level - l
-    end
+      @level = @level-l<1 ? 1 : @level-l
   end
 
   def setPendingBadConsequence(b)
