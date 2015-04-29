@@ -79,32 +79,24 @@ class BadConsequence
     if !@specificVisibleTreasures.empty? || !@specificHiddenTreasures.empty?
       newVisibleTreasuresBad = Array.new
       newHiddenTreasuresBad = Array.new
-      add=true
+      copyOfspecificVisibleTreasures = @specificVisibleTreasures.clone
+      copyOfspecificHiddenTreasures = @specificHiddenTreasures.clone
       
       v.each do |t|
-        if @specificVisibleTreasures.include? t
-          if v.count(t)==2 && @specificVisibleTreasures.count(t.type)==1
-            if add
-              add = false
-              newVisibleTreasuresBad << t.type
-            end
-          else
-            newVisibleTreasuresBad << t.type
-          end
+        if copyOfspecificVisibleTreasures.include? t.type
+          index = copyOfspecificVisibleTreasures.index(t.type)
+          puts index
+          copyOfspecificVisibleTreasures.delete_at(index)
+          newVisibleTreasuresBad << t.type
         end
       end
-      add=true
       
       h.each do |t|
-        if @specificHiddenTreasures.include? t
-          if h.count(t)==2 && @specificHiddenTreasures.count(t.type)==1
-            if add
-              add = false
-              newHiddenTreasuresBad << t.type
-            end
-          else
-            newHiddenTreasuresBad << t.type
-          end
+        if copyOfspecificHiddenTreasures.include? t.type
+          index = copyOfspecificHiddenTreasures.index(t.type)
+          puts index
+          copyOfspecificHiddenTreasures.delete_at(index)
+          newHiddenTreasuresBad << t.type
         end
       end
       BadConsequence.newSpecificTreasures(@text, 0, newVisibleTreasuresBad, newHiddenTreasuresBad) #return
