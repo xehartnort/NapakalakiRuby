@@ -50,7 +50,7 @@ class Napakalaki
       @currentPlayerIndex += 1
       @currentPlayerIndex %= @players.size
     end
-    @currentPlayer = @players.at(@currentPlayerIndex)
+    @players.at(@currentPlayerIndex)
   end
   
   private :initPlayers, :nextPlayer
@@ -83,9 +83,8 @@ class Napakalaki
 
   def nextTurn
     if nextTurnIsAllowed
-      nextPlayer
       @currentMonster = CardDealer.instance.nextMonster
-      #@currentPlayer = nextPlayer El método NextPlayer ya hace la asignación dentro de él
+      @currentPlayer = nextPlayer
       if @currentPlayer.dead
         @currentPlayer.initTreasures
       end
