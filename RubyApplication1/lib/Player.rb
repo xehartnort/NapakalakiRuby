@@ -129,7 +129,7 @@ class Player
               combate = CombatResult::LOSE
           end
       end
-      #discardNecklaceIfVisible esto
+      discardNecklaceIfVisible
       combate
   end
   
@@ -266,11 +266,10 @@ class Player
       combatLevel += t.minBonus
       combatLevelCollar += t.maxBonus
     end
-    if (combatLevelCollar!=combatLevel) && collar
-      discardNecklaceIfVisible
-      combatLevelCollar # return
+    if collar
+      combatLevelCollar
     else
-      combatLevel # return
+      combatLevel
     end
   end
   
