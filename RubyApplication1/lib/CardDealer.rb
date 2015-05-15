@@ -3,6 +3,7 @@
 
 require_relative 'Treasures.rb'
 require_relative 'Monster.rb'
+require_relative 'Cultist.rb'
 require_relative 'BadConsequence.rb'
 require_relative 'Prize.rb'
 require 'singleton'
@@ -11,6 +12,16 @@ module Model
   class CardDealer
     include Singleton #Alé y a pastá
 
+    def initCultistCardDeck
+        @unusedCultists = Array.new
+        @unusedCultists<< Cultist.new("+1 por cada sectario en juego."+"\n\tNo puedes dejar de ser sectario.", 1)
+        @unusedCultists<< Cultist.new("+2 por cada sectario en juego."+"\n\tNo puedes dejar de ser sectario.", 2)
+        @unusedCultists<< Cultist.new("+1 por cada sectario en juego."+"\n\tNo puedes dejar de ser sectario.", 1)
+        @unusedCultists<< Cultist.new("+2 por cada sectario en juego."+"\n\tNo puedes dejar de ser sectario.", 2)
+        @unusedCultists<< Cultist.new("+1 por cada sectario en juego."+"\n\tNo puedes dejar de ser sectario.", 1)
+        @unusedCultists<< Cultist.new("+1 por cada sectario en juego."+"\n\tNo puedes dejar de ser sectario.", 1)
+    end
+    
     def initTreasureCardDeck
       @usedTreasures = Array.new
       @unusedTreasures = Array.new
@@ -246,13 +257,15 @@ module Model
       prize = Prize.new(1, 1)
       @unusedMonsters << Monster.new("Bicéfalo", 20, badConsequence, prize, 0)
 
+      
   # NUEVOS MONSTRUOS CON SECTARIOS
 
+      
      #El mal indecible impronunciable 
       badConsequence = BCSpecificTreasures.new("Pierdes 1 mano visible.", 0,
-                    [TreasureKind::ONEHAND], Array.new);
-      prize = Prize.new(3,1);
-      @unusedMonsters << Monster.new("El mal indecible impronunciable", 10, badConsequence, prize, -2);
+                    [TreasureKind::ONEHAND], Array.new)
+      prize = Prize.new(3,1)
+      @unusedMonsters << Monster.new("El mal indecible impronunciable", 10, badConsequence, prize, -2)
 
      #Testigos Oculares
       badConsequence = BCNumberOfTreasures.new("Pierdes tus tesoros visibles. Jajaja.", 0, 99999, 0)
@@ -328,8 +341,10 @@ module Model
     def initCards
       initMonsterCardDeck
       initTreasureCardDeck
+      initCultistCardDeck
       shuffleMonsters
       shuffleTreasures
+      shuffleCultist
     end
 
     def giveTreasureBack(t)
