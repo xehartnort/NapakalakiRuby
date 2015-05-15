@@ -18,55 +18,56 @@ module Model
 
     @@MAXHIDDENTREASURES=4
 
-  def initialize(name)
-    @level = 1
-    @name = name
-    @dead = true
-    @visibleTreasures = Array.new
-    @hiddenTreasures = Array.new
-    @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
-    @dealer = CardDealer.instance
-  end
-  
-  def isDead
-    @dead
-  end
-  
-  def getVisibleTreasures
-    @visibleTreasures
-  end
-  
-  def getName
-    @name
-  end
-  
-  def getHiddenTreasures
-    @hiddenTreasures
-  end
-  
-  private ########################### Zona privada #############################
-  
-  def bringToLive 
-    @dead = false
-  end
-  
-  def incrementLevels(l)
-    @level+=l    
-  end
-  
-  def decrementLevels(l)
-      @level = @level-l<1 ? 1 : @level-l
-  end
-
-  def setPendingBadConsequence(b)
-    @pendingBadConsequence = b
-  end
-  
-  def die
-    @visibleTreasures.each do |t| 
-      @dealer.giveTreasureBack(t)
+    def initialize(name)
+      @level = 1
+      @name = name
+      @dead = true
+      @visibleTreasures = Array.new
+      @hiddenTreasures = Array.new
+      @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
+      @dealer = CardDealer.instance
     end
 
+    def isDead
+      @dead
+    end
+
+    def getVisibleTreasures
+      @visibleTreasures
+    end
+
+    def getName
+      @name
+    end
+
+    def getHiddenTreasures
+      @hiddenTreasures
+    end
+
+    private ########################### Zona privada #############################
+
+    def bringToLive 
+      @dead = false
+    end
+
+    def incrementLevels(l)
+      @level+=l    
+    end
+
+    def decrementLevels(l)
+        @level = @level-l<1 ? 1 : @level-l
+    end
+
+    def setPendingBadConsequence(b)
+      @pendingBadConsequence = b
+    end
+
+    def die
+      @visibleTreasures.each do |t| 
+        @dealer.giveTreasureBack(t)
+      end
+    end
+    
     def getVisibleTreasures
       @visibleTreasures
     end
