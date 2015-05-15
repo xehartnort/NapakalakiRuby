@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
-
+module Model
 class Prize
 =begin
 Constructor que crea y asigna las variables 
@@ -23,4 +23,5 @@ gana el jugador al derrotar al mostruo
 
   attr_reader :treasures, :levels
 
+end
 end

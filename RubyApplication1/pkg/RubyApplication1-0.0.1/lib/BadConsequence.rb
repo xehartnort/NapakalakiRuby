@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 require_relative 'Treasures.rb'
-
+module Model
 class BadConsequence
   
   ########## Constructores ##########
@@ -76,46 +76,37 @@ class BadConsequence
   end
 
   def adjustToFitTreasureLists(v, h)#v:Treasure[], h:Treasure[]
-    newVisibleTreasuresBad = Array.new
-    newHiddenTreasuresBad = Array.new
     if !@specificVisibleTreasures.empty? || !@specificHiddenTreasures.empty?
-      add=true
+      newVisibleTreasuresBad = Array.new
+      newHiddenTreasuresBad = Array.new
+      copyOfspecificVisibleTreasures = @specificVisibleTreasures.clone
+      copyOfspecificHiddenTreasures = @specificHiddenTreasures.clone
       
       v.each do |t|
-        if v.count(t)==2 && @specificVisibleTreasures.count(t.type)==1
-          if add
-            add = false
-            newVisibleTreasuresBad << t.type
-          end
-        else
-            newVisibleTreasuresBad << t.type
+        if copyOfspecificVisibleTreasures.include? t.type
+          index = copyOfspecificVisibleTreasures.index(t.type)
+          puts index
+          copyOfspecificVisibleTreasures.delete_at(index)
+          newVisibleTreasuresBad << t.type
         end
       end
-      add=true
       
       h.each do |t|
-        if h.count(t)==2 && @specificHiddenTreasures.count(t.type)==1
-          if add
-            add = false
-            newHiddenTreasuresBad << t.type
-          end
-        else
-            newHiddenTreasuresBad << t.type
+        if copyOfspecificHiddenTreasures.include? t.type
+          index = copyOfspecificHiddenTreasures.index(t.type)
+          puts index
+          copyOfspecificHiddenTreasures.delete_at(index)
+          newHiddenTreasuresBad << t.type
         end
       end
+      BadConsequence.newSpecificTreasures(@text, 0, newVisibleTreasuresBad, newHiddenTreasuresBad) #return
     else
 #     Número de tesoros visibles a quitar 
       minVisibleTreasures =  @nVisibleTreasures > v.length ? v.length : @nVisibleTreasures
-      for i in 1..minVisibleTreasures do
-        newVisibleTreasuresBad << v[i].type
-      end
-#     Número de tesoros ocultos a quitar
+#      Número de tesoros ocultos a quitar
       minHiddenTreasures = @nHiddenTreasures > h.length ? h.length : @nHiddenTreasures
-      for i in 1..minHiddenTreasures do
-        newHiddenTreasuresBad << h[i].type
-      end
+      BadConsequence.newNumberOfTreasures(@text, 0, minVisibleTreasures, minHiddenTreasures) #return
     end
-    BadConsequence.new(@text, @levels, newVisibleTreasuresBad, newHiddenTreasuresBad) #return
   end
   
   def to_s
@@ -148,3 +139,4 @@ class BadConsequence
   
 end
 
+end

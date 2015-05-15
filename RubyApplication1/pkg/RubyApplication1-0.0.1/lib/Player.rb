@@ -9,7 +9,7 @@ require_relative 'Cartas.rb'
 require_relative 'Treasures.rb'
 require_relative 'CardDealer.rb'
 require_relative 'Dice.rb'
-
+module Model
 # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION
 # Mucho cuidado con delete, que borra todas las ocurrencias de un dato
 # no solo uno
@@ -18,9 +18,6 @@ class Player
 
   @@MAXHIDDENTREASURES=4
 
-  attr_reader :visibleTreasures, :hiddenTreasures, :dead
-  attr_writer :pendingBadConsequence
-  
   def initialize(name)
     @level = 1
     @name = name
@@ -31,6 +28,22 @@ class Player
     @dealer = CardDealer.instance
   end
   
+  def isDead
+    @dead
+  end
+  
+  def getVisibleTreasures
+    @visibleTreasures
+  end
+  
+  def getName
+    @name
+  end
+  
+  def getHiddenTreasures
+    @hiddenTreasures
+  end
+  
   private ########################### Zona privada #############################
   
   def bringToLive 
@@ -38,21 +51,16 @@ class Player
   end
   
   def incrementLevels(l)
-     @level= @level+l
+    @level+=l    
   end
   
   def decrementLevels(l)
-    if @level-l < 1
-      die #Mata si el nivel baja de 1? Sí, míralo
-    else
-      @level = @level - l
-    end
+      @level = @level-l<1 ? 1 : @level-l
   end
 
-#  Se añadió attr_writter   
-#  def setPendingBadConsequence(b)
-#    @pendingBadConsequence = b
-#  end
+  def setPendingBadConsequence(b)
+    @pendingBadConsequence = b
+  end
   
   def die
     @visibleTreasures.each do |t| 
@@ -63,6 +71,8 @@ class Player
       @dealer.giveTreasureBack(t)
     end
     @hiddenTreasures.clear
+    @level = 1
+    @dead = true
   end
   
   def discardNecklaceIfVisible
@@ -89,7 +99,7 @@ class Player
   def computeGoldCoinsValue(t)
     levels = 0.0
     t.each do |i|
-      levels += (i.goldCoins/1000)
+      levels += (i.goldCoins.to_f/1000)
     end
     levels
   end
@@ -110,10 +120,8 @@ class Player
         if @level > 9 
           combate = CombatResult::WINANDWINGAME
         else
-          combate = CombatResult.WIN;
+          combate = CombatResult::WIN;
         end
-#      else
-#        if Dice.instance.nextNumber<5
       elsif Dice.instance.nextNumber<5
           if m.bc.death
               die
@@ -133,7 +141,7 @@ class Player
 #    end
     decrementLevels(b.levels) if b.levels!=0
     bad = b.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
-    @pendingBadConsequence = bad
+    setPendingBadConsequence(bad)
   end
   
   def makeTreasureVisible(t)
@@ -146,11 +154,11 @@ class Player
   end
   
   def canMakeTreasureVisible(t)
-    @visibleTreasure << t #inserta al final del array el objeto t
+    @visibleTreasures << t #inserta al final del array el objeto t
     canI = true
 #    valido = [false, false, false, false, false, false]
     valido = Array.new(6, false) # array de 6 componentes, todas a false
-    @vivibleTreasure.each do |i|
+    @visibleTreasures.each do |i|
       case i.type
         when TreasureKind::ARMOR
           if valido[0]
@@ -238,6 +246,7 @@ class Player
   def buyLevels(visible, hidden)
     levels = computeGoldCoinsValue(visible)
     levels += computeGoldCoinsValue(hidden)
+    levels = levels.to_i
     canI = canIBuyLevels(levels)
     if canI
       incrementLevels(levels)
@@ -259,7 +268,11 @@ class Player
       combatLevel += t.minBonus
       combatLevelCollar += t.maxBonus
     end
-    collar==true ? combatLevelCollar : combatLevel  #return
+    if collar
+      combatLevelCollar
+    else
+      combatLevel
+    end
   end
   
   def validState
@@ -280,7 +293,7 @@ class Player
     numeroTesoros = 3 if tirada==6
     numeroTesoros = 1 if tirada == 1
     for i in 1..numeroTesoros do
-      @hiddenTeasure << @dealer.nextTreasure
+      @hiddenTreasures << @dealer.nextTreasure
     end
   end
   
@@ -313,4 +326,6 @@ class Player
     text += textoHiddenTreasures + "}" + textoVisibleTreasures + "}" #return
   end 
   
+end
+
 end

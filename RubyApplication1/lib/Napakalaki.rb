@@ -31,6 +31,51 @@ module Model
       @players = Array.new
       names.each do |n|
         @players.push(Player.new(n));
+  def nextPlayer
+    if @@firstTurn
+      @@firstTurn=false;
+      @currentPlayerIndex = Dice.instance.nextNumber % @players.size
+    else
+      @currentPlayerIndex += 1
+      @currentPlayerIndex %= @players.size
+    end
+    @players.at(@currentPlayerIndex)
+  end
+  
+  private :initPlayers, :nextPlayer
+  
+  def combat 
+    @currentPlayer.combat(@currentMonster) #return
+  end
+  
+  def discardVisibleTreasure(t)#Treasure
+    @currentPlayer.discardVisibleTreasure(t)
+  end
+  
+  def discardHiddenTreasure(t)#Treasure
+    @currentPlayer.discardHiddenTreasure(t)
+  end
+  
+  def makeTreasureVisible(t)#Treasure
+    @currentPlayer.canMakeTreasureVisible(t)
+  end
+  
+  def buyLevels(visible, hidden)#Array, Array
+    @currentPlayer.buyLevels(visible, hidden) #return
+  end
+  
+  def initGame(players)#Array
+    initPlayers(players)
+    CardDealer.instance.initCards
+    nextTurn
+  end
+
+  def nextTurn
+    if nextTurnIsAllowed
+      @currentMonster = CardDealer.instance.nextMonster
+      @currentPlayer = nextPlayer
+      if @currentPlayer.isDead
+        @currentPlayer.initTreasures
       end
     end
 

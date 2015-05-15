@@ -7,7 +7,7 @@ require_relative 'BadConsequence.rb'
 require_relative 'Prize.rb'
 require 'singleton'
 
-
+module Model
 class CardDealer
   include Singleton #Alé y a pastá
   
@@ -70,8 +70,8 @@ class CardDealer
     # el segundo specificHiddenTreasures
     # Análogamente si no es array es nVisibleTreasures y nHiddenTreasures
     badConsequence = BadConsequence.newSpecificTreasures("Embobados con el lindo" +
-                                                        "primigenio te descartas de tu casco" +
-                                                        "visible",0, 
+                                                        "\n\tprimigenio te descartas de tu casco" +
+                                                        "\n\tvisible",0, 
                                                         [TreasureKind::HELMET], 
                                                         Array.new)
     prize = Prize.new(1, 1)
@@ -84,7 +84,7 @@ class CardDealer
     # el segundo specificHiddenTreasures
     # Análogamente si no es array es nVisibleTreasures y nHiddenTreasures
     badConsequence = BadConsequence.newSpecificTreasures("El primordial bostezo contaguioso." +
-                                                        "Pierdes el calzado visible",0, 
+                                                        "\n\tPierdes el calzado visible",0, 
                                                         [TreasureKind::HELMET], 
                                                         Array.new)
     prize = Prize.new(1,1)
@@ -110,7 +110,7 @@ class CardDealer
     # El primer array de badConsequence es specificVisibleTreasures, 
     # el segundo specificHiddenTreasures
     # Análogamente si no es array es nVisibleTreasures y nHiddenTreasures
-    badConsequence = BadConsequence.newNumberOfTreasures("Pierdes todos tus tesores visibles.", 
+    badConsequence = BadConsequence.newNumberOfTreasures("Pierdes todos tus tesoros visibles.", 
                                                         1, 9999, 0)
     prize = Prize.new(3,1)
     # Añade un nuevo monstruo al final del array
@@ -167,7 +167,7 @@ class CardDealer
   
   
     #Los hondos
-    badConsequence = BadConsequence.newDeath("Estos  unusedMonsters resultan "+
+    badConsequence = BadConsequence.newDeath("Estos resultan "+
                                             "\n\tbastante superficiales y te aburren "+
                                             "\n\tmortalmente. Estas muerto")
     prize = Prize.new(2,1)
@@ -240,7 +240,7 @@ class CardDealer
   
     #Bicéfalo
     badConsequence = BadConsequence.newNumberOfTreasures("Te faltan manos para" +
-                                                         "\n\tanta cabeza. Pierdes 3 niveles y tus" +
+                                                         "\n\ttanta cabeza. Pierdes 3 niveles y tus" +
                                                          "\n\ttesoros visibles de las manos.",
                                                          3,9999,0)
     prize = Prize.new(1, 1)
@@ -311,7 +311,5 @@ class CardDealer
   end
   
 end
-if __FILE__==$0
-  e=CardDealer.instance
-  e.initCards
+
 end
