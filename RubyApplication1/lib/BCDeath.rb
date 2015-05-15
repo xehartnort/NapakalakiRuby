@@ -2,30 +2,32 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-class BCDeath < BadConsequence
-  
-  public_class_method :new
-  
-  def initialize(text, death)
-    super(text, 0, death)
-  end
-  
-  def isEmpty
-    @death==false
-  end
-  
-  def substractHiddenTreasure(t)
-  end
+module Model
+  class BCDeath < BadConsequence
 
-  def substractHiddenTreasure(t)
+    public_class_method :new
+
+    def initialize(text, death)
+      super(text, 0, death)
+    end
+
+    def isEmpty
+      @death==false
+    end
+
+    def substractHiddenTreasure(t)
+    end
+
+    def substractHiddenTreasure(t)
+    end
+
+    def adjustToFitTreasureLists(v, h)
+      self
+    end
+
+    def to_s
+      @textoIntroduccion + "\n\tTexto = " + @text.to_s + "\n\tDeath = " + @death.to_s # return
+    end
+
   end
-  
-  def adjustToFitTreasureLists(v, h)
-    self
-  end
-  
-  def to_s
-    @textoIntroduccion + "\n\tTexto = " + @text.to_s + "\n\tDeath = " + @death.to_s # return
-  end
-  
 end
