@@ -18,8 +18,6 @@ class Player
 
   @@MAXHIDDENTREASURES=4
 
-  attr_reader :dead
-
   def initialize(name)
     @level = 1
     @name = name
@@ -28,6 +26,10 @@ class Player
     @hiddenTreasures = Array.new
     @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
     @dealer = CardDealer.instance
+  end
+  
+  def isDead
+    @dead
   end
   
   def getVisibleTreasures

@@ -10,6 +10,7 @@ require_relative 'Dice.rb'
 require_relative 'CombatResult.rb'
 require 'singleton'
 
+module Model
 class Napakalaki
   include Singleton
 
@@ -25,8 +26,6 @@ class Napakalaki
 # Sin embargo esta variable es solo de clase y así no origina
 # ningún problema :)
   @@firstTurn=true
-
-  attr_reader :currentPlayer, :currentMonster
   
   def initPlayers(names)#Array
     @players = Array.new
@@ -35,14 +34,23 @@ class Napakalaki
     end
   end
   
+  def getCurrentPlayer
+    @currentPlayer
+  end
+  
+  def getCurrentMonster
+    @currentMonster
+  end
+
   def nextPlayer
     if @@firstTurn
       @@firstTurn=false;
-      @currentPlayerIndex = Dice.instance.nextNumber%@players.size
+      @currentPlayerIndex = Dice.instance.nextNumber % @players.size
     else
-      @currentPlayerIndex+=1
+      @currentPlayerIndex += 1
       @currentPlayerIndex %= @players.size
     end
+    @players.at(@currentPlayerIndex)
   end
   
   private :initPlayers, :nextPlayer
@@ -75,7 +83,7 @@ class Napakalaki
 
   def nextTurn
     if nextTurnIsAllowed
-      @currentMonster = CardDealer.instace.nextMonster
+      @currentMonster = CardDealer.instance.nextMonster
       @currentPlayer = nextPlayer
       if @currentPlayer.isDead
         @currentPlayer.initTreasures
@@ -92,4 +100,5 @@ class Napakalaki
     result==CombatResult::WINANDWINGAME #return
   end
   
+end
 end

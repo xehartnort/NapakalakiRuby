@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 require_relative 'TreasureKind.rb'
-
+module Model
 class Treasure
   
 #  @name string
@@ -20,11 +20,11 @@ class Treasure
     @type=t
   end
   def to_s
-    "\n\tTesoro: " + name + 
-    "\n\t\tGoldBonus: " + Integer.toString(goldBonus) + 
-    "\n\t\tMinBonus: " + Integer.toString(minBonus) + 
-    "\n\t\tMaxBonus: " + Integer.toString(maxBonus) +
-    "\n\t\tTreasureKind: " + type
+    "\n\tTesoro: " + @name + 
+    "\n\t\tGoldBonus: " + @goldCoins.to_s + 
+    "\n\t\tMinBonus: " + @minBonus.to_s + 
+    "\n\t\tMaxBonus: " + @maxBonus.to_s +
+    "\n\t\tTreasureKind: " + @type.to_s
   end
 end
 
@@ -32,4 +32,5 @@ end
 if __FILE__ == $0
   tesorito=Treasure.new("Anillo del poder", 1000000000, 9999, -2, TreasureKind::ONEHAND)
   puts "Mi tesoorooo: ", tesorito.name, tesorito.goldCoins, tesorito.minBonus, tesorito.maxBonus, tesorito.type
+end
 end

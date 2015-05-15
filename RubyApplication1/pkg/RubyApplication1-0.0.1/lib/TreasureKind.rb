@@ -4,7 +4,7 @@
 #TreasureKind
 #
 #Autor:Salva
-
+module Model
 module TreasureKind
   #ARMOR, ONEHAND, BOTHHANDS, HELMET, SHOE, NECKLACE
   ARMOR = :ARMOR
@@ -13,4 +13,5 @@ module TreasureKind
   HELMET = :HELMET
   SHOE = :SHOE
   NECKLACE = :NECKLACE
+end
 end

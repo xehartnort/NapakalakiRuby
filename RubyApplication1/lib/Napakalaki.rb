@@ -85,7 +85,7 @@ class Napakalaki
     if nextTurnIsAllowed
       @currentMonster = CardDealer.instance.nextMonster
       @currentPlayer = nextPlayer
-      if @currentPlayer.dead
+      if @currentPlayer.isDead
         @currentPlayer.initTreasures
       end
     end
