@@ -314,9 +314,9 @@ module Model
       @unusedMonsters.shuffle!
     end
 
-    private :shuffleMonsters, :shuffleTreasures, :initMonsterCardDeck, :initTreasureCardDeck
+    private :shuffleMonsters, :shuffleTreasures, :shuffleCultist, :initMonsterCardDeck, :initTreasureCardDeck, :initCultistCardDeck
 
-    def nextTreasure()
+    def nextTreasure
       if @unusedTreasures.empty?
         @usedTreasures.shuffle!
         @unusedTreasures = @usedTreasures.clone
@@ -327,7 +327,7 @@ module Model
         treasure #return
     end
 
-    def nextMonster()
+    def nextMonster
       if @unusedMonsters.empty?
         @usedMonsters.shuffle!
         @unusedMonsters = @usedMonsters.clone #Funciona porque copia la referencias de un nivel
@@ -336,6 +336,10 @@ module Model
       monster = @unusedMonsters.pop
       @usedMonsters << monster
       monster #return
+    end
+    
+    def nextCultist
+      @unusedCultist.pop 
     end
 
     def initCards
