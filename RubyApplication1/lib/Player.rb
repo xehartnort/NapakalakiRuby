@@ -5,6 +5,9 @@ require_relative 'TreasureKind.rb'
 require_relative 'Prize.rb'
 require_relative 'Monster.rb'
 require_relative 'BadConsequence.rb'
+require_relative 'BCDeath.rb'
+require_relative 'BCNumberOfTreasures.rb'
+require_relative 'BCSpecificTreasures.rb'
 require_relative 'Cartas.rb'   
 require_relative 'Treasures.rb'
 require_relative 'CardDealer.rb'
@@ -24,19 +27,21 @@ module Model
       @dead = true
       @visibleTreasures = Array.new
       @hiddenTreasures = Array.new
-      @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
+      @pendingBadConsequence = BCDeath.new("Vacio", false)
       @dealer = CardDealer.instance
     end
-    
-    def selp.copyPlayer(p)
-      new(p.getName)
-      @level = p.getLevel
+
+    def self.copy(p)
+      new(p.name)
+      @level = p.level
       @dead = p.isDead
       @visibleTreasures = p.getVisibleTreasures
       @hiddenTreasures = p.getHiddenTreasures
       @pendingBadConsequence = p.getPendingBadConsequence
     end
-
+    attr_reader :name, :level
+    #protected :name
+    
     def isDead
       @dead
     end

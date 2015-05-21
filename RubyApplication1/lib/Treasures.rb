@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 require_relative 'TreasureKind.rb'
+require_relative 'Card.rb'
 module Model
   class Treasure
 
