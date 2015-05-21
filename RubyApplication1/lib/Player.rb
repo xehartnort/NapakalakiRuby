@@ -27,6 +27,15 @@ module Model
       @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
       @dealer = CardDealer.instance
     end
+    
+    def selp.copyPlayer(p)
+      new(p.getName)
+      @level = p.getLevel
+      @dead = p.isDead
+      @visibleTreasures = p.getVisibleTreasures
+      @hiddenTreasures = p.getHiddenTreasures
+      @pendingBadConsequence = p.getPendingBadConsequence
+    end
 
     def isDead
       @dead
@@ -36,50 +45,13 @@ module Model
       @visibleTreasures
     end
 
-    def getName
-      @name
-    end
-
     def getHiddenTreasures
       @hiddenTreasures
     end
-
-    private ########################### Zona privada #############################
-
-    def bringToLive 
-      @dead = false
-    end
-
-    def incrementLevels(l)
-      @level+=l    
-    end
-
-    def decrementLevels(l)
-        @level = @level-l<1 ? 1 : @level-l
-    end
-
-    def setPendingBadConsequence(b)
-      @pendingBadConsequence = b
-    end
-
-    def die
-      @visibleTreasures.each do |t| 
-        @dealer.giveTreasureBack(t)
-      end
+    def getPendingBadConsequence
+      @pendingBadConsequence;
     end
     
-    def getVisibleTreasures
-      @visibleTreasures
-    end
-
-    def getName
-      @name
-    end
-
-    def getHiddenTreasures
-      @hiddenTreasures
-    end
-
     private ########################### Zona privada #############################
 
     def bringToLive 
@@ -138,6 +110,14 @@ module Model
         levels += (i.goldCoins.to_f/1000)
       end
       levels
+    end
+    
+    def shouldConvert
+        Dice.getInstance().nextNumber()==6
+    end
+    
+    def getOponentLevel(m)
+      m.getBasicValue
     end
 
     public ########################### Zona pública #############################
