@@ -12,24 +12,30 @@ require_relative 'CardDealer.rb'
 require_relative 'Dice.rb'
 
 class CultistPlayer < Player
+  
   def initialize(p,c)
     super.copyPlayer(p)
     @myCultistCard = c
     @@totalCultistPlayers+=1
   end
+  
   def getCombatLevel
     super.getCombatLevel()+myCultistCard.getSpecialValue()
   end
   def self.getTotalCultistPlayers
     @@totalCultistPlayers
   end
+  
  protected
+ 
   def shouldConvert
     false
   end
+  
   def getOponentLevel(m)
       m.getSpecialValue
   end
+  
   def computeGoldCoinsValue(t)
     super.computeGoldCoinsValue(t)*2
   end
