@@ -131,7 +131,7 @@ module Model
 
     def combat(m)
       combate = CombatResult::LOSEANDESCAPE
-        if getCombatLevel > m.combatLevel
+        if getCombatLevel > m.getCombatLevel
           applyPrize(m.prize)
           if @level > 9 
             combate = CombatResult::WINANDWINGAME
@@ -139,13 +139,15 @@ module Model
             combate = CombatResult::WIN;
           end
         elsif Dice.instance.nextNumber<5
-            if m.bc.death
-                die
-                combate = CombatResult::LOSEANDDIE
-            else
-                applyBadConsequence(m.bc)
-                combate = CombatResult::LOSE
-            end
+          if shouldConvert
+            combate = CombatResult::LOSEANDCONVERT
+          elsif m.bc.death
+              die
+              combate = CombatResult::LOSEANDDIE
+          else
+              applyBadConsequence(m.bc)
+              combate = CombatResult::LOSE
+          end
         end
         discardNecklaceIfVisible
         combate
