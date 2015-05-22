@@ -17,7 +17,7 @@ module Model
 class CultistPlayer < Player
   @@totalCultistPlayers=0
   def initialize(p,c)
-    super.new(p.getName, p.getLevel, p.isDead, p.getVisibleTreasures, p.getHiddenTreasures, getPendingBadConsequence)
+    super.new(p.name, p.level, p.isDead, p.getVisibleTreasures, p.getHiddenTreasures, p.getPendingBadConsequence)
     @myCultistCard = c
     @@totalCultistPlayers+=1
   end

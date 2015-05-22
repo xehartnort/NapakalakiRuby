@@ -4,6 +4,7 @@
 require_relative 'Treasures.rb'
 require_relative 'Monster.rb'
 require_relative 'Cultist.rb'
+require_relative 'CultistPlayer.rb'
 require_relative 'BadConsequence.rb'
 require_relative 'Prize.rb'
 require 'singleton'

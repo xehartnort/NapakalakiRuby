@@ -12,6 +12,7 @@ require_relative 'Cartas.rb'
 require_relative 'Treasures.rb'
 require_relative 'CardDealer.rb'
 require_relative 'Dice.rb'
+
 module Model
 # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION # PRECAUCION
 # Mucho cuidado con delete, que borra todas las ocurrencias de un dato
@@ -21,7 +22,7 @@ module Model
 
     @@MAXHIDDENTREASURES=4
 
-    def initialize(name, l=1, d=true, v =array.new, h=Array.new, p=BadConseqence.newNumberOfTreasures("Vacio", 0, 0, 0))
+    def initialize(name, l=1, d=true, v =Array.new, h=Array.new, p=BadConseqence.newNumberOfTreasures("Vacio", 0, 0, 0))
       @level = l
       @name = name
       @dead = d
@@ -32,8 +33,13 @@ module Model
     end
     
     attr_reader :name, :level
-    #protected :name
+    protected :name, :level
     
+    #EXAMEN
+    def setHiddenTreasureList(h)
+      @hiddenTreasures = h
+    end
+    #FIN EXAMEN
     def isDead
       @dead
     end
@@ -320,7 +326,8 @@ module Model
       text = "\n\tName = " + @name.to_s+
             "\n\tLevel = " + @level.to_s + 
             "\n\tPendingBadConsequence: { " + @pendingBadConsequence.to_s + "\n\t} "+
-            "\n\tDead = " + @dead.to_s
+            "\n\tDead = " + @dead.to_s +
+            "\n\tCombatLevel =" + self.getCombatLevel.to_s
       textoHiddenTreasures = " \n\tArray Hidden Treasures: { "
       textoVisibleTreasures = " \n\tArray Visible Treasures: { "
       unless @visibleTreasures.empty?

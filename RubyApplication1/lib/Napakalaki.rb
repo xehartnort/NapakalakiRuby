@@ -115,10 +115,6 @@ module Model
 
     private :initPlayers, :nextPlayer
 
-    def combat 
-      @currentPlayer.combat(@currentMonster) #return
-    end
-
     def discardVisibleTreasure(t)#Treasure
       @currentPlayer.discardVisibleTreasure(t)
     end

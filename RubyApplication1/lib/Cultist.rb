@@ -4,13 +4,14 @@
 require_relative 'Card.rb'
 require_relative 'Player.rb'
 require_relative 'BadConsequence.rb'
+require_relative 'CultistPlayer.rb'
 require_relative 'BCDeath.rb'
 require_relative 'BCNumberOfTreasures.rb'
 require_relative 'BCSpecificTreasures.rb'
 
 module Model
   
-  class Cultist < Player
+  class Cultist
     include Card # interfaz
 
     def initialize(text, level)
