@@ -28,7 +28,7 @@ module Model
       @visibleTreasures = v
       @hiddenTreasures = h
       @pendingBadConsequence = p
-      @dealer = CardDealer.instanceu
+      @dealer = CardDealer.instance
     end
     
     attr_reader :name, :level
