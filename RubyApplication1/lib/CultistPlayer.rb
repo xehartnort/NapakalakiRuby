@@ -2,7 +2,7 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-require_relative 'Player'
+require_relative 'Player.rb'
 require_relative 'Cultist.rb'
 require_relative 'Monster.rb'
 require_relative 'BadConsequence.rb'
@@ -20,7 +20,7 @@ class CultistPlayer < Player
   end
   
   def getCombatLevel
-    super+myCultistCard.getSpecialValue()
+    super+@myCultistCard.getSpecialValue()
     #creo que la siguiente línea tambien está bien
     #super+myCultistCard.getSpecialValue()
   end
