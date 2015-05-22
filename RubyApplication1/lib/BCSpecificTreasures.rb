@@ -61,7 +61,7 @@ module Model
           newHiddenTreasuresBad << t.type
         end
       end
-      BadConsequence.newSpecificTreasures(@text, 0, newVisibleTreasuresBad, newHiddenTreasuresBad) #return
+      BCSpecificTreasures(@text, 0, newVisibleTreasuresBad, newHiddenTreasuresBad) #return
     end
 
     def to_s

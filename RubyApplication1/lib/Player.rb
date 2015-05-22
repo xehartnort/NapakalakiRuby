@@ -128,7 +128,7 @@ module Model
 
     def combat(m)
       combate = CombatResult::LOSEANDESCAPE
-        if getCombatLevel > m.getCombatLevel
+        if getCombatLevel > getOponentLevel(m)
           applyPrize(m.prize)
           if @level > 9 
             combate = CombatResult::WINANDWINGAME

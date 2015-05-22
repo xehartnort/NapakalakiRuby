@@ -51,7 +51,7 @@ module Model
       resultadoCombate = @currentPlayer.combat(@currentMonster) #return
       if resultadoCombate == CombatResult::LOSEANDESCAPE
         newCultist = CultistPlayer.new(@currentPlayer, CardDealer.instance.nextCultist)
-        players.each do |p|
+        @players.each do |p|
           if p==@currentPlayer
             p = newCultist
             break
@@ -141,7 +141,7 @@ module Model
       if nextTurnIsAllowed
         @currentMonster = CardDealer.instance.nextMonster
         @currentPlayer = nextPlayer
-        if @currentPlayer.dead
+        if @currentPlayer.isDead
           @currentPlayer.initTreasures
         end
       end
