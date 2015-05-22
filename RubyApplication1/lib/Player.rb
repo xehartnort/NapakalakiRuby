@@ -5,6 +5,9 @@ require_relative 'TreasureKind.rb'
 require_relative 'Prize.rb'
 require_relative 'Monster.rb'
 require_relative 'BadConsequence.rb'
+require_relative 'BCDeath.rb'
+require_relative 'BCNumberOfTreasures.rb'
+require_relative 'BCSpecificTreasures.rb'
 require_relative 'Cartas.rb'   
 require_relative 'Treasures.rb'
 require_relative 'CardDealer.rb'
@@ -27,7 +30,10 @@ module Model
       @pendingBadConsequence = p
       @dealer = CardDealer.instanceu
     end
-
+    
+    attr_reader :name, :level
+    #protected :name
+    
     def isDead
       @dead
     end

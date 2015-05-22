@@ -48,7 +48,18 @@ module Model
     private :initPlayers, :nextPlayer
 
     def combat 
-      @currentPlayer.combat(@currentMonster) #return
+      resultadoCombate = @currentPlayer.combat(@currentMonster) #return
+      if resultadoCombate == CombatResult::LOSEANDESCAPE
+        newCultist = CultistPlayer.new(@currentPlayer, CardDealer.instance.nextCultist)
+        players.each do |p|
+          if p==@currentPlayer
+            p = newCultist
+            break
+          end
+        end
+        @currentPlayer = newCultist
+      end
+      resultadoCombate #return
     end
 
     def discardVisibleTreasure(t)#Treasure

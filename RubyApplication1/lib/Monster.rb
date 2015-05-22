@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
+require_relative 'Card.rb'
 module Model
+  
   class Monster
 
     include Card # interfaz

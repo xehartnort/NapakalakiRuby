@@ -339,7 +339,7 @@ module Model
     end
     
     def nextCultist
-      @unusedCultist.pop 
+      @unusedCultists.pop 
     end
 
     def initCards
