@@ -5,10 +5,9 @@ require_relative 'TreasureKind.rb'
 require_relative 'Prize.rb'
 require_relative 'Monster.rb'
 require_relative 'BadConsequence.rb'
-require_relative 'BCDeath.rb'
 require_relative 'BCNumberOfTreasures.rb'
+require_relative 'BCDeath.rb'
 require_relative 'BCSpecificTreasures.rb'
-require_relative 'Cartas.rb'   
 require_relative 'Treasures.rb'
 require_relative 'CardDealer.rb'
 require_relative 'Dice.rb'
@@ -22,7 +21,7 @@ module Model
 
     @@MAXHIDDENTREASURES=4
 
-    def initialize(name, l=1, d=true, v =Array.new, h=Array.new, p=BadConseqence.newNumberOfTreasures("Vacio", 0, 0, 0))
+    def initialize(name, l=1, d=true, v =Array.new, h=Array.new, p=BCDeath.new("Vacio", false))
       @level = l
       @name = name
       @dead = d
@@ -35,11 +34,6 @@ module Model
     attr_reader :name, :level
     protected :name, :level
     
-    #EXAMEN
-    def setHiddenTreasureList(h)
-      @hiddenTreasures = h
-    end
-    #FIN EXAMEN
     def isDead
       @dead
     end
@@ -116,7 +110,7 @@ module Model
     end
     
     def shouldConvert
-        Dice.getInstance().nextNumber()==6
+        Dice.instance.nextNumber==6
     end
     
     def getOponentLevel(m)
@@ -157,9 +151,6 @@ module Model
     end
 
     def applyBadConsequence(b)
-  #    if b.levels !=0
-  #      decrementLevels(b.levels)
-  #    end
       decrementLevels(b.levels) if b.levels!=0
       bad = b.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
       setPendingBadConsequence(bad)
