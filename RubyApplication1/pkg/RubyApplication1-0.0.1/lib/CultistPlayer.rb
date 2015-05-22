@@ -10,10 +10,12 @@ require_relative 'Cartas.rb'
 require_relative 'Treasures.rb'
 require_relative 'CardDealer.rb'
 require_relative 'Dice.rb'
+require_relative 'Player.rb'
 
 class CultistPlayer < Player
+  @@totalCultistPlayers=0
   def initialize(p,c)
-    super.copyPlayer(p)
+    super.new(p.getName, p.getLevel, p.isDead, p.getVisibleTreasures, p.getHiddenTreasures, getPendingBadConsequence)
     @myCultistCard = c
     @@totalCultistPlayers+=1
   end

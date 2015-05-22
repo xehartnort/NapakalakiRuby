@@ -18,23 +18,14 @@ module Model
 
     @@MAXHIDDENTREASURES=4
 
-    def initialize(name)
-      @level = 1
+    def initialize(name, l=1, d=true, v =array.new, h=Array.new, p=BadConseqence.newNumberOfTreasures("Vacio", 0, 0, 0))
+      @level = l
       @name = name
-      @dead = true
-      @visibleTreasures = Array.new
-      @hiddenTreasures = Array.new
-      @pendingBadConsequence = BadConsequence.newNumberOfTreasures("Vacio", 0, 0, 0)
-      @dealer = CardDealer.instance
-    end
-    
-    def selp.copyPlayer(p)
-      new(p.getName)
-      @level = p.getLevel
-      @dead = p.isDead
-      @visibleTreasures = p.getVisibleTreasures
-      @hiddenTreasures = p.getHiddenTreasures
-      @pendingBadConsequence = p.getPendingBadConsequence
+      @dead = d
+      @visibleTreasures = v
+      @hiddenTreasures = h
+      @pendingBadConsequence = p
+      @dealer = CardDealer.instanceu
     end
 
     def isDead
