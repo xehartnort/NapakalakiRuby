@@ -10,14 +10,14 @@ module Model
       @levels = levels
       @death = death
     end
-
-    protected @textoIntroduccion, @text, @levels, @death
+    
+#    protected :textoIntroduccion, :text, :levels, :death
 
     private_class_method :new # Efecto Wert, privatiza el método new
 
     ########## Getters ruby ##########
 
-    attr_reader :text, :levels, :death 
+    attr_reader :textoIntroduccion, :text, :levels, :death 
 
     def kills
       @death

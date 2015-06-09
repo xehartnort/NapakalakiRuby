@@ -1,7 +1,7 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
-
+require_relative 'BadConsequence'
 module Model
   class BCNumberOfTreasures < BadConsequence
 
@@ -34,7 +34,7 @@ module Model
       minVisibleTreasures =  @nVisibleTreasures > v.length ? v.length : @nVisibleTreasures
   #   Número de tesoros ocultos a quitar
       minHiddenTreasures = @nHiddenTreasures > h.length ? h.length : @nHiddenTreasures
-      BadConsequence.newNumberOfTreasures(@text, 0, minVisibleTreasures, minHiddenTreasures) #return
+      BCNumberOfTreasures.new(@text, 0, minVisibleTreasures, minHiddenTreasures) #return
     end
 
     def to_s

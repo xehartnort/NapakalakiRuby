@@ -180,10 +180,10 @@ module Model
       #Los hondos
       badConsequence = BCDeath.new("Estos resultan "+
                                               "\n\tbastante superficiales y te aburren "+
-                                              "\n\tmortalmente. Estas muerto")
+                                              "\n\tmortalmente. Estas muerto", true)
       prize = Prize.new(2,1)
 
-      @unusedMonsters << Monster.new("Los hondos", 8 ,badConsequence,prize)
+      @unusedMonsters << Monster.new("Los hondos", 8 ,badConsequence,prize,0)
 
       #Semillas Cthulhu
       badConsequence = BCNumberOfTreasures.new("Pierdes 2 niveles y 2 "+
@@ -212,7 +212,7 @@ module Model
       #Yskhtihyssq-Goth
       badConsequence = BCDeath.new("No le hace gracia que"+
                                               "\n\tpronuncien mal su nombre. Estas"+
-                                              "\n\tmuerto")
+                                              "\n\tmuerto", true)
       prize = Prize.new(3,1)
       # Añade un nuevo monstruo al final del array
       @unusedMonsters << Monster.new("Yskhtihyssq-Goth", 12, badConsequence, prize, 0)
@@ -220,7 +220,7 @@ module Model
 
       #Familia feliz
       badConsequence = BCDeath.new("La familia te atrapa."+
-                                              "\n\tEstas muerto")
+                                              "\n\tEstas muerto", true)
       prize = Prize.new(4,1)
       # Añade un nuevo monstruo al final del array
       @unusedMonsters << Monster.new("Familia feliz", 1, badConsequence, prize, 0)
@@ -303,7 +303,7 @@ module Model
     end
 
     def shuffleCultist
-      @unusedCultist.shuffle!
+      @unusedCultists.shuffle!
     end
 
     def shuffleTreasures
@@ -339,7 +339,7 @@ module Model
     end
     
     def nextCultist
-      @unusedCultist.pop 
+      @unusedCultists.pop 
     end
 
     def initCards
